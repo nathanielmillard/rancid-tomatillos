@@ -1,0 +1,16 @@
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar-component {
+  width: 20vw;
+  height: 100vh;
+  background-color: red;
+}
+
+.movie-directory {
+  margin: 0 20px;
+  padding: 50px 20px;
+  width: 80vw;
+}
