@@ -1,13 +1,14 @@
 import React from 'react';
+
+import Navbar from './components/NavBar';
+
 import './App.scss';
 
 function App() {
   return (
     <main>
       {/* Sidebar component goes here */}
-      <div className='sidebar-component'>
-
-      </div>
+      <Navbar />
       <div className='movie-directory'>
         <h1>Overall Top Rated</h1>
       </div>
