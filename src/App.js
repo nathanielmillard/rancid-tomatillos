@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Navbar from './components/NavBar';
+import MovieMain from './components/MovieMain';
 
 import './App.scss';
 
@@ -16,12 +17,8 @@ class App extends Component {
   render() {
     return (
       <main>
-        {/* Sidebar component goes here */}
         <Navbar currentUser={this.state.currentUser} />
-        <div className='movie-directory'>
-          <h1>Overall Top Rated</h1>
-        </div>
-        {/* Movie Directory component goes here */}
+        <MovieMain />
       </main>
     );
   }
