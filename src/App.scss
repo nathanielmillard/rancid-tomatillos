@@ -1,0 +1,45 @@
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar-component {
+  width: 20vw;
+  height: 100vh;
+  background-color: red;
+}
+
+.movie-directory {
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    margin-left: 20px
+  }
+}
+
+.movie-main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0 20px;
+  width: 80vw;
+  height: 90vh;
+  overflow: scroll;
+}
+
+.movie-tile {
+  width: 200px;
+  height: 300px;
+  margin: 10px;
+
+  img {
+    height: 90%
+  }
+
+  .movie-title {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  }
+}
