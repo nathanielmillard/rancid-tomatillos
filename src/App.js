@@ -18,7 +18,10 @@ class App extends Component {
     return (
       <main>
         <Navbar currentUser={this.state.currentUser} />
-        <MovieMain />
+        <section class="movie-directory">
+          <h2>Top Rated Movies</h2>
+          <MovieMain />
+        </section>
       </main>
     );
   }
