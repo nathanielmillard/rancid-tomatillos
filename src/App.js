@@ -13,16 +13,20 @@ class App extends Component {
     super();
 
     this.state = {
-      currentUser: ''
+      currentUser: '',
+      id: ''
+      //maybe consider Nan lets do research
     }
   }
 
-  logInUser = () => {
-    this.setState({currentUser: 'Lucy'})
+  logInUser = (user) => {
+    console.log(user)
+    this.setState({currentUser: user.user.name, id: user.user.id})
+    // this.setState(user.user) potential refactor later
   }
 
   logOutUser = () => {
-    this.setState({currentUser: ''})
+    this.setState({currentUser: '', id: ''})
   }
 
   render() {

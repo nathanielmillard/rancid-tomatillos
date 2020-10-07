@@ -16,7 +16,23 @@ class SignIn extends Component {
   evaluateUser = (event) => {
     event.preventDefault()
     if (this.state.email.toLowerCase() === 'lucy@turing.io' && this.state.password === 'password1'){
-      this.props.logIn()
+      const data = {
+        email: 'lucy@turing.io',
+        password: 'password1'
+      }
+      fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(response => this.props.logIn(response))
+      .catch(error => {
+        console.log(error)
+        alert('Something went wrong on our end')
+      })
     } else {
       alert('Wrong email or password')
     }
