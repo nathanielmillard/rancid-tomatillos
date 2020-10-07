@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 
 import Navbar from './components/NavBar';
+import SignIn from './components/Sign-In';
 import MovieMain from './components/MovieMain';
+import { Route, Switch } from 'react-router-dom'
+
 
 import './App.scss';
 
@@ -10,7 +13,7 @@ class App extends Component {
     super();
 
     this.state = {
-      currentUser: 'Nathaniel'
+      currentUser: ''
     }
   }
 
@@ -18,10 +21,10 @@ class App extends Component {
     return (
       <main>
         <Navbar currentUser={this.state.currentUser} />
-        <section class="movie-directory">
-          <h2>Top Rated Movies</h2>
-          <MovieMain />
-        </section>
+        <Switch>
+          <Route exact path="/" component={MovieMain}/>
+          <Route exact path="/sign-in" component={ SignIn }/>
+        </Switch>
       </main>
     );
   }

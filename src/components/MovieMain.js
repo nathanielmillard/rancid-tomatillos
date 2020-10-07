@@ -41,10 +41,13 @@ class MovieMain extends Component {
   render() {
     const moviesComponents = this.state.movies.map(movie => <MovieTile movie={movie} />)
     return (
-      <section className='movie-main'>
-        {
-          this.state.loading !== '' ? this.state.loading :  moviesComponents
-        }
+      <section class="movie-directory">
+        <h2>Top Rated Movies</h2>
+        <section className='movie-main'>
+          {
+            this.state.loading !== '' ? this.state.loading :  moviesComponents
+          }
+        </section>
       </section>
     )
   }
