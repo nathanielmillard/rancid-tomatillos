@@ -7,6 +7,7 @@ class MovieMain extends Component {
     super();
 
     this.state = {
+      loading: 'All Movies Loading...',
       movies: []
     }
   }
@@ -19,16 +20,19 @@ class MovieMain extends Component {
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
       .then(response => response.json())
       .then(data => {
-        console.log('here with componentDidMount')
-        this.setState({movies: data.movies})
+        data.movies.sort((a,b)=>{
+         return b.average_rating - a.average_rating
+        })
+        this.setState({loading: '', movies: data.movies})
       });
   }
 
   render() {
+    const moviesComponents = this.state.movies.map(movie => <MovieTile movie={movie} />)
     return (
       <section className='movie-main'>
         {
-          this.state.movies.map(movie => <MovieTile movie={movie} />)
+          this.state.loading !== '' ? this.state.loading :  moviesComponents 
         }
       </section>
     )
