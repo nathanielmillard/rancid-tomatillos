@@ -7,7 +7,7 @@ class MovieMain extends Component {
     super();
 
     this.state = {
-      loading: 'All Movies Loading...',
+      loading: 'All Movies Trying To Load...',
       movies: []
     }
   }
@@ -18,13 +18,24 @@ class MovieMain extends Component {
 
   getAllMovieData = () => {
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        } else {
+          alert('Something went wrong with our server')
+        }
+      })
       .then(data => {
         data.movies.sort((a,b)=>{
          return b.average_rating - a.average_rating
         })
         this.setState({loading: '', movies: data.movies})
-      });
+      })
+      .catch(error => {
+        console.log(error)
+        alert('We encountered an error, please reload page')
+      }
+      );
   }
 
   render() {
@@ -32,7 +43,7 @@ class MovieMain extends Component {
     return (
       <section className='movie-main'>
         {
-          this.state.loading !== '' ? this.state.loading :  moviesComponents 
+          this.state.loading !== '' ? this.state.loading :  moviesComponents
         }
       </section>
     )
