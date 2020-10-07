@@ -21,15 +21,18 @@ class App extends Component {
     this.setState({currentUser: 'Lucy'})
   }
 
+  logOutUser = () => {
+    this.setState({currentUser: ''})
+  }
+
   render() {
     return (
       <main>
-        <Navbar currentUser={this.state.currentUser} />
+        <Navbar currentUser={this.state.currentUser} signOut = {this.logOutUser} />
         <Switch>
           <Route exact path="/" component={MovieMain}/>
           <Route exact path="/sign-in" render={
             () => { if (this.state.currentUser === 'Lucy'){
-              console.log('Made it here')
               return <Redirect to="/"/>
             } else {
               return <SignIn logIn={this.logInUser}/>
