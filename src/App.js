@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import Navbar from './components/NavBar';
-import SignIn from './components/Sign-In';
-import MovieMain from './components/MovieMain';
+import Navbar from './components/Navbar/NavBar';
+import SignIn from './components/Sign-In/Sign-In';
+import MovieMain from './components/MovieMain/MovieMain';
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 
