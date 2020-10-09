@@ -1,8 +1,10 @@
 import React from 'react';
 
-const NavBar = (props) => {
+import { Link } from 'react-router-dom'
 
-	const signInButton = <button> SignIn </button>
+const NavBar = (props) => {
+	const signInButton = <Link to='/sign-in'><button>SignIn</button>
+	</Link>
 	const signOutButton =  <button onClick={props.signOut}> SignOut </button>
 	return (
 		<section className='navbar-component'>
