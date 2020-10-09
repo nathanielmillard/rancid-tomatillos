@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-// import {Route, Switch, Redirect} from 'react-router-dom'
 
 class SignIn extends Component {
   constructor(props){
@@ -14,7 +13,7 @@ class SignIn extends Component {
   }
 
   evaluateUser = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     if (this.state.email.toLowerCase() === 'lucy@turing.io' && this.state.password === 'password1'){
       const data = {
         email: 'lucy@turing.io',
