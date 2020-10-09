@@ -20,17 +20,13 @@ class App extends Component {
 
 	logInUser = user => {
 		console.log(user);
-    this.setState({ currentUser: user.user.name, id: user.user.id });
-    return <Redirect to='/' />;
+		this.setState({ currentUser: user.user.name, id: user.user.id });
 		// this.setState(user.user) potential refactor later
 	};
 
 	logOutUser = () => {
-    this.setState({ currentUser: '', id: '' });
-    return <Redirect to='/' />;
-  };
-  
-  redirectToHomePage
+		this.setState({ currentUser: '', id: '' });
+	};
 
 	render() {
 		return (
