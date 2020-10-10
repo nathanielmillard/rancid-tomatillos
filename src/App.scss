@@ -4,7 +4,7 @@ main {
 }
 
 .navbar-component {
-  width: 20vw;
+  min-width: 20vw;
   height: 100vh;
   background-color: red;
 }
@@ -41,5 +41,38 @@ main {
     text-align: center;
     padding: 0;
     margin: 0;
+  }
+}
+
+.movie-show-page {
+  display: flex;
+  background-color: black;
+  // background-color: black;
+  .background {
+    height: auto;
+    width: 80vw;
+    opacity: 60%;
+    position: fixed;
+    z-index: 1;
+  }
+  .movie-section{
+    margin-left: 2vw;
+    height: 60vh;
+    position: relative;
+    z-index: 2;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    opacity: 100%;
+    .main-poster {
+      height: inherit;
+    }
+    .movie-info{
+      color: white;
+      display: flex;
+      flex-direction: column;
+      margin-left: 5vw;
+      justify-content: center;
+    }
   }
 }
