@@ -34,7 +34,7 @@ class App extends Component {
 
 	logOutUser = () => {
 		this.setState({ currentUser: '', id: '' });
-		return <MovieMain />
+		window.location.pathname = '/'
 	};
 
 	findMovieShowInfo = () => {
@@ -70,10 +70,10 @@ class App extends Component {
 						exact
 						path='/sign-in'
 						render={() => {
-							if (this.state.currentUser === 'Lucy') {
-								return <Redirect to='/' />;
-							} else {
+							if (!this.state.currentUser) {
 								return <SignIn logIn={this.logInUser} />;
+							} else {
+								return <Redirect to='/' />;
 							}
 						}}
 					/>
