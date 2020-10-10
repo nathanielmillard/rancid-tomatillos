@@ -1,28 +1,74 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-const MovieShowPage = (props) => {
-  const foundRating = props.userMovieRating.find(rating => rating.movie_id === props.movie.id)
-  return (
-  <section className='movie-show-page'>
-    <img className='background' src={props.movie.backdrop_path} alt={props.movie.title + 'backdrop'}/>
-    <div className="movie-section">
-      <img className='main-poster' src={props.movie.poster_path}  alt={props.movie.title + 'poster'}/>
-      <div className='movie-info'>
-        <h1>{props.movie.title}</h1>
-        <h2>Release Date: {props.movie.release_date} </h2>
-        <h3>Rating: {props.movie.average_rating} </h3>
-        { (foundRating) ? 
-          <h3 className='movie-user-rating'>Your Rating: {foundRating.rating}</h3> : 
-          <label htmlFor='rating'>Rating:
-            <input type='number' value='5' min='1' max='10' />
-            <button>Submit</button>
-          </label>
-        }
-        <p>{props.movie.overview}</p>
-      </div>
-    </div>
-  </section>
-)
+class MovieShowPage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      rating: ''
+    }
+  }
+
+  submitRating = () => {
+    if (!Number.isInteger(+this.state.rating) || this.state.rating < 1 || this.state.rating > 10) {
+      alert('The number can only be a whole number between 1 and 10');
+      return;
+    }
+    if (!this.props.userID) {
+      alert('You must be logged in to review a movie');
+      return;
+    }
+    const data = {
+      "movie_id": this.props.movie.id,
+      rating: +this.state.rating
+    }
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${this.props.userID}/ratings`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      if (response.ok) return response.json();
+    })
+    .then(() => this.props.getUserRatings())
+    .catch(error => {
+      console.log(error);
+      alert('We were not able to save your rating. Please refresh and try again.');
+    })
+    this.setState({rating: ''});
+  }
+
+  updateRatingInput = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value})
+  }
+
+  render() {
+    const foundRating = this.props.userMovieRating.find(rating => rating.movie_id === this.props.movie.id)
+    return (
+      <section className='movie-show-page'>
+        <img className='background' src={this.props.movie.backdrop_path} alt={this.props.movie.title + 'backdrop'}/>
+        <div className="movie-section">
+          <img className='main-poster' src={this.props.movie.poster_path}  alt={this.props.movie.title + 'poster'}/>
+          <div className='movie-info'>
+            <h1>{this.props.movie.title}</h1>
+            <h2>Release Date: {this.props.movie.release_date} </h2>
+            <h3>Rating: {this.props.movie.average_rating} </h3>
+            { (foundRating) ? 
+              <h3 className='movie-user-rating'>Your Rating: {foundRating.rating}</h3> : 
+              <label htmlFor='rating'>Rating:
+                <input name='rating' type='number' min='1' max='10' onChange={this.updateRatingInput} />
+                <button onClick={this.submitRating}>Submit</button>
+              </label>
+            }
+            <p>{this.props.movie.overview}</p>
+          </div>
+        </div>
+      </section>
+    )
+  }
 }
 
 export default MovieShowPage
