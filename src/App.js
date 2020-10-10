@@ -16,6 +16,7 @@ class App extends Component {
 			currentUser: '',
 			id: '',
 			foundMovie: '',
+			ratings: []
 			//maybe consider Nan lets do research
 		};
 
@@ -28,6 +29,7 @@ class App extends Component {
 	logInUser = user => {
 		console.log(window.location);
 		this.setState({ currentUser: user.user.name, id: user.user.id });
+		this.getUserRatings();
 		// get fetch data for user rating info here
 		// this.setState(user.user) potential refactor later
 	};
@@ -53,8 +55,23 @@ class App extends Component {
 				alert('Something went wrong, navigate back to the homepage')
 			})
 		}
-		return <MovieShowPage movie={this.state.foundMovie} />
+		return <MovieShowPage movie={this.state.foundMovie} userMovieRating={this.state.ratings} />
 		// add user rating here as well
+	}
+
+	getUserRatings = () => {
+		console.log(this.state.id)
+		fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${this.state.id}/ratings`)
+			.then(response => {
+				if (response.ok) {
+					return response.json()
+				}
+			})
+			.then(ratings => this.setState(ratings))
+			.catch(error => {
+				console.log(error)
+				alert('Something went wrong getting your movie reviews')
+			})
 	}
 
 	render() {
@@ -65,7 +82,7 @@ class App extends Component {
 					signOut={this.logOutUser}
 				/>
 				<Switch>
-					<Route exact path='/' component={MovieMain} />
+					<Route exact path='/' render={() => <MovieMain currentUser={this.state} />} />
 					<Route
 						exact
 						path='/sign-in'
