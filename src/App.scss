@@ -1,3 +1,9 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 main {
   display: flex;
   flex-direction: row;
@@ -37,7 +43,7 @@ main {
     height: 90%
   }
 
-  .movie-title {
+  .movie-rating, .movie-user-rating {
     text-align: center;
     padding: 0;
     margin: 0;
