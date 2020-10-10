@@ -19,18 +19,11 @@ class App extends Component {
 			ratings: []
 			//maybe consider Nan lets do research
 		};
-
-		// Custom Movie Ratings is an object with a key/value pair where value is an array
-		// each rating should be an object where
-			// it has the ID of the movie with the rating
-			// the rating of the movie in integer format 1 - 10
 	}
 
 	logInUser = user => {
-		console.log(window.location);
 		this.setState({ currentUser: user.user.name, id: user.user.id });
 		this.getUserRatings();
-		// get fetch data for user rating info here
 		// this.setState(user.user) potential refactor later
 	};
 
@@ -55,12 +48,10 @@ class App extends Component {
 				alert('Something went wrong, navigate back to the homepage')
 			})
 		}
-		return <MovieShowPage movie={this.state.foundMovie} userMovieRating={this.state.ratings} />
-		// add user rating here as well
+		return <MovieShowPage movie={this.state.foundMovie} userMovieRating={this.state.ratings} userID={this.state.id} getUserRatings={this.getUserRatings} />
 	}
 
 	getUserRatings = () => {
-		console.log(this.state.id)
 		fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${this.state.id}/ratings`)
 			.then(response => {
 				if (response.ok) {
