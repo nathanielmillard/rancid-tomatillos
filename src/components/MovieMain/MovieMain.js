@@ -39,7 +39,7 @@ class MovieMain extends Component {
   }
 
   render() {
-    const moviesComponents = this.state.movies.map(movie => <MovieTile movie={movie} />)
+    const moviesComponents = this.state.movies.map(movie => <MovieTile key={movie.id} movie={movie} />)
     return (
       <section className="movie-directory">
         <h2>Top Rated Movies</h2>
