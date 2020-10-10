@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 
 const MovieTile = (props) => {
   const foundRating = props.userMovieRating.find(rating => rating.movie_id === props.movie.id)
-  if (foundRating) console.log(foundRating);
   return (
     <article className='movie-tile'>
       <Link to={`/MovieShowPage/${props.movie.id}`}>
