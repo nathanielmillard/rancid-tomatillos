@@ -6,6 +6,8 @@ import MovieMain from '../MovieMain/MovieMain';
 import MovieShowPage from '../MovieShowPage/MovieShowPage';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
+// import {getAllMovies} from '../../apiCalls.js'
+
 import './App.scss';
 
 class App extends Component {
