@@ -1,12 +1,10 @@
-<<<<<<< HEAD
 @import 'variables';
-=======
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
->>>>>>> 75a0e05f35676c8b68a1cc256ff944f7c8469d69
 
 main {
   display: flex;
@@ -16,7 +14,15 @@ main {
 .navbar-component {
   min-width: 20vw;
   height: 100vh;
-  background-color: $colorLight;
+  background-color: $nuetralLightest;
+  h1, Link {
+    color: $brightAccent;
+    font-family: $title;
+    font-style: normal;
+    text-decoration: none;
+    align-self: center;
+  }
+
 }
 
 .movie-directory {
