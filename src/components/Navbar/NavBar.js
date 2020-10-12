@@ -8,7 +8,7 @@ const NavBar = (props) => {
 	const signOutButton =  <button onClick={props.signOut}> SignOut </button>
 	return (
 		<section className='navbar-component'>
-			<h1 className='navbar-title'>Rancid Tomatillos</h1>
+			<Link to='/'><h1 className='navbar-title'>Rancid Tomatillos</h1></Link>
 			{(!props.currentUser) ? signInButton :	signOutButton }
       {
         (!props.currentUser) ? '' : <h3 className='navbar-current-user'>{props.currentUser}</h3>
