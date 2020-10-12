@@ -31,13 +31,13 @@ class MovieShowPage extends Component {
       if (response.ok) {
         return response.json()
       } else {
-        this.setState({error: 'We were not able to save your rating. Please refresh and try again.'})
+        this.setState({ wrongInput: '', error: 'We were not able to save your rating. Please refresh and try again.'})
       }
     })
     .then(() => this.props.getUserRatings())
     .catch(error => {
       console.log(error);
-      this.setState({error: 'We were not able to save your rating. Please refresh and try again.'})
+      this.setState({ wrongInput: '', error: 'We were not able to save your rating. Please refresh and try again.'})
     })
     this.setState({rating: '', wrongInput: '', error: ''});
   }
@@ -70,7 +70,7 @@ class MovieShowPage extends Component {
             <h1>{this.props.movie.title}</h1>
             <h2>Release Date: {this.props.movie.release_date} </h2>
             <h3>Rating: {parseFloat(this.props.movie.average_rating).toFixed(1)} </h3>
-            { this.state.wrongInput || this.state.error ? <h3>{this.state.wrongInput || this.state.error }</h3> : ''}
+            { (this.state.wrongInput || this.state.error) ? <h3>{this.state.wrongInput || this.state.error }</h3> : ''}
             { (this.props.userID) ?
               userRatingSection :
               <h3>Sign in to leave your own rating</h3>
