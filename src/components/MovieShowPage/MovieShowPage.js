@@ -5,20 +5,22 @@ class MovieShowPage extends Component {
     super(props);
 
     this.state = {
-      rating: ''
+      rating: '',
+      wrongInput: '',
+      error: ''
     }
   }
 
   submitRating = () => {
     if (!Number.isInteger(+this.state.rating) || this.state.rating < 1 || this.state.rating > 10) {
-      alert('The number can only be a whole number between 1 and 10');
+      this.setState({ wrongInput: 'The number can only be a whole number between 1 and 10' });
       return;
     }
     const data = {
       "movie_id": this.props.movie.id,
       rating: +this.state.rating
     }
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${this.props.userID}/ratings`, {
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${this.props.userID}/rat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -26,14 +28,18 @@ class MovieShowPage extends Component {
       body: JSON.stringify(data)
     })
     .then(response => {
-      if (response.ok) return response.json();
+      if (response.ok) {
+        return response.json()
+      } else {
+        this.setState({error: 'We were not able to save your rating. Please refresh and try again.'})
+      }
     })
     .then(() => this.props.getUserRatings())
     .catch(error => {
       console.log(error);
-      alert('We were not able to save your rating. Please refresh and try again.');
+      this.setState({error: 'We were not able to save your rating. Please refresh and try again.'})
     })
-    this.setState({rating: ''});
+    this.setState({rating: '', wrongInput: '', error: ''});
   }
 
   updateRatingInput = (event) => {
@@ -63,7 +69,8 @@ class MovieShowPage extends Component {
           <div className='movie-info'>
             <h1>{this.props.movie.title}</h1>
             <h2>Release Date: {this.props.movie.release_date} </h2>
-            <h3>Rating: {this.props.movie.average_rating} </h3>
+            <h3>Rating: {parseFloat(this.props.movie.average_rating).toFixed(1)} </h3>
+            { this.state.wrongInput || this.state.error ? <h3>{this.state.wrongInput || this.state.error }</h3> : ''}
             { (this.props.userID) ?
               userRatingSection :
               <h3>Sign in to leave your own rating</h3>
