@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 @import 'variables';
+=======
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+>>>>>>> 75a0e05f35676c8b68a1cc256ff944f7c8469d69
 
 main {
   display: flex;
@@ -39,7 +47,7 @@ main {
     height: 90%
   }
 
-  .movie-title {
+  .movie-rating, .movie-user-rating {
     text-align: center;
     padding: 0;
     margin: 0;

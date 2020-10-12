@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 import MovieTile from '../MovieTile/MovieTile';
 
 class MovieMain extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       loading: 'All Movies Trying To Load...',
@@ -39,7 +39,7 @@ class MovieMain extends Component {
   }
 
   render() {
-    const moviesComponents = this.state.movies.map(movie => <MovieTile movie={movie} />)
+    const moviesComponents = this.state.movies.map(movie => <MovieTile key={movie.id} movie={movie} userMovieRating={this.props.currentUser.ratings} />)
     return (
       <section className="movie-directory">
         <h2>Top Rated Movies</h2>
