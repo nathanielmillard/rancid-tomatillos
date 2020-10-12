@@ -6,7 +6,6 @@ import MovieMain from './components/MovieMain/MovieMain';
 import MovieShowPage from './components/MovieShowPage/MovieShowPage';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import './App.scss';
 
 class App extends Component {
 	constructor() {
