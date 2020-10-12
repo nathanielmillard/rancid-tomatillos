@@ -10,6 +10,7 @@ class SignIn extends Component {
       error: ''
     }
   }
+  
   updateState = (event) => {
     this.setState({ [event.target.name]: event.target.value })
   }

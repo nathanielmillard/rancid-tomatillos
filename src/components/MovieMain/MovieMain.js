@@ -8,7 +8,8 @@ class MovieMain extends Component {
 
     this.state = {
       loading: 'All Movies Trying To Load...',
-      movies: []
+      movies: [],
+      error: ''
     }
   }
 
@@ -17,23 +18,23 @@ class MovieMain extends Component {
   }
 
   getAllMovieData = () => {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
+    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/mov')
       .then(response => {
         if (response.ok) {
           return response.json()
         } else {
-          alert('Something went wrong with our server')
+          this.setState({ error: 'We encountered an error, please reload page' });
         }
       })
       .then(data => {
         data.movies.sort((a,b)=>{
          return b.average_rating - a.average_rating
         })
-        this.setState({loading: '', movies: data.movies})
+        this.setState({loading: '', movies: data.movies, error: '' })
       })
       .catch(error => {
         console.log(error)
-        alert('We encountered an error, please reload page')
+        this.setState({ error: 'We encountered an error, please reload page' });
       }
       );
   }
@@ -47,6 +48,7 @@ class MovieMain extends Component {
           {
             this.state.loading !== '' ? this.state.loading :  moviesComponents
           }
+          { (this.state.error) ? this.state.error : ''}
         </section>
       </section>
     )
