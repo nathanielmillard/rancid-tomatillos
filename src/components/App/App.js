@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import Navbar from './components/Navbar/NavBar';
-import SignIn from './components/Sign-In/Sign-In';
-import MovieMain from './components/MovieMain/MovieMain';
-import MovieShowPage from './components/MovieShowPage/MovieShowPage';
+import Navbar from '../Navbar/NavBar';
+import SignIn from '../Sign-In/Sign-In';
+import MovieMain from '../MovieMain/MovieMain';
+import MovieShowPage from '../MovieShowPage/MovieShowPage';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import './App.scss';
@@ -40,7 +40,7 @@ class App extends Component {
 				if (response.ok) {
 					return response.json()
 				} else {
-					alert('Something went wrong, navigate back to the homepage')	
+					alert('Something went wrong, navigate back to the homepage')
 				}
 			})
 			.then(response => {

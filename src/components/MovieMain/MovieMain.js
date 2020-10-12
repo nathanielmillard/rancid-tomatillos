@@ -18,7 +18,7 @@ class MovieMain extends Component {
   }
 
   getAllMovieData = () => {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/mov')
+    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
       .then(response => {
         if (response.ok) {
           return response.json()
