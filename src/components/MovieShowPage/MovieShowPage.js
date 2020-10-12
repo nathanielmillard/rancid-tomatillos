@@ -14,10 +14,6 @@ class MovieShowPage extends Component {
       alert('The number can only be a whole number between 1 and 10');
       return;
     }
-    if (!this.props.userID) {
-      alert('You must be logged in to review a movie');
-      return;
-    }
     const data = {
       "movie_id": this.props.movie.id,
       rating: +this.state.rating
@@ -47,6 +43,18 @@ class MovieShowPage extends Component {
 
   render() {
     const foundRating = this.props.userMovieRating.find(rating => rating.movie_id === this.props.movie.id)
+    let userRatingSection = '';
+    
+    if (foundRating) {
+      userRatingSection = <h3 className='movie-user-rating'>Your Rating: {foundRating.rating}</h3>
+    } else {
+      userRatingSection = 
+      <label htmlFor='rating'>Rate this movie:
+        <input name='rating' type='number' min='1' max='10' onChange={this.updateRatingInput} />
+        <button onClick={this.submitRating}>Submit</button>
+      </label>
+    } 
+              
     return (
       <section className='movie-show-page'>
         <img className='background' src={this.props.movie.backdrop_path} alt={this.props.movie.title + 'backdrop'}/>
@@ -56,12 +64,9 @@ class MovieShowPage extends Component {
             <h1>{this.props.movie.title}</h1>
             <h2>Release Date: {this.props.movie.release_date} </h2>
             <h3>Rating: {this.props.movie.average_rating} </h3>
-            { (foundRating) ? 
-              <h3 className='movie-user-rating'>Your Rating: {foundRating.rating}</h3> : 
-              <label htmlFor='rating'>Rating:
-                <input name='rating' type='number' min='1' max='10' onChange={this.updateRatingInput} />
-                <button onClick={this.submitRating}>Submit</button>
-              </label>
+            { (this.props.userID) ?
+              userRatingSection :
+              <h3>Sign in to leave your own rating</h3>
             }
             <p>{this.props.movie.overview}</p>
           </div>
