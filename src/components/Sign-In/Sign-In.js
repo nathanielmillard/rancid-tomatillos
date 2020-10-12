@@ -10,7 +10,7 @@ class SignIn extends Component {
       error: ''
     }
   }
-  
+
   updateState = (event) => {
     this.setState({ [event.target.name]: event.target.value })
   }
@@ -29,7 +29,13 @@ class SignIn extends Component {
         },
         body: JSON.stringify(data)
       })
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        } else {
+          this.setState({ wrongInput: '', error: 'Something went wrong on our end' });  
+        }
+      })
       .then(response => this.props.logIn(response))
       .catch(error => {
         console.log('inside catch', error.message)

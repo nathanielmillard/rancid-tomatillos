@@ -38,8 +38,11 @@ class App extends Component {
 		fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieID}`)
 			.then(response => {
 				if (response.ok) {
-				return response.json()
-			}})
+					return response.json()
+				} else {
+					alert('Something went wrong, navigate back to the homepage')	
+				}
+			})
 			.then(response => {
 					this.setState({foundMovie: response.movie})
 				})
