@@ -6,7 +6,7 @@ import MovieMain from '../MovieMain/MovieMain';
 import MovieShowPage from '../MovieShowPage/MovieShowPage';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import {getOneMovie, getUserRatings} from '../../apiCalls.js'
+import {getUserRatings} from '../../apiCalls.js'
 
 import './App.scss';
 
@@ -17,10 +17,8 @@ class App extends Component {
 		this.state = {
 			currentUser: '',
 			id: '',
-			foundMovie: '',
 			ratings: [],
 			error: ''
-			//maybe consider Nan lets do research
 		};
 	}
 
@@ -34,20 +32,6 @@ class App extends Component {
 		this.setState({ currentUser: '', id: '' });
 		window.location.pathname = '/'
 	};
-
-	findMovieShowInfo = () => {
-		let movieID = parseInt(window.location.pathname.split('/')[2]);
-	  if(this.state.foundMovie === '' || this.state.foundMovie.id !== movieID ) {
-				getOneMovie(movieID).then(response => {
-					this.setState(response)}
-				)
-		}
-		if (this.state.error === '') {
-			return <MovieShowPage movie={this.state.foundMovie} userMovieRating={this.state.ratings} userID={this.state.id} populateUserRatings={this.populateUserRatings} />
-		} else {
-			return <h1> {this.state.error} </h1>
-		}
-	}
 
 	populateUserRatings = () => {
 		getUserRatings(this.state.id).then(response => this.setState(response))
@@ -74,8 +58,16 @@ class App extends Component {
 							}
 						}}
 					/>
-					<Route exact path='/MovieShowPage/:movieId'
-					render={this.findMovieShowInfo}/>
+					<Route exact path='/MovieShowPage/:movieID'
+					render={({match}) => {
+						const movieID = match.params.movieID
+						return <MovieShowPage
+						movieID={movieID}
+						userMovieRatings={this.state.ratings}
+						userID={this.state.id}
+						populateUserRatings={this.populateUserRatings}
+						/>
+					}}/>
 				</Switch>
 			</main>
 		);

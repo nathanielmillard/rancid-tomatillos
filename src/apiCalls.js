@@ -30,10 +30,10 @@ export const getOneMovie = (movieID) => {
       }
     })
     .then(response => {
-        return {foundMovie: response.movie, error: ''}
+        return {movie: response.movie, error: ''}
       })
     .catch(error => {
-      return {foundMovie: '', error: 'Something went wrong, navigate back to the homepage'}
+      return {movie: '', error: 'Something went wrong, navigate back to the homepage'}
     })
 }
 

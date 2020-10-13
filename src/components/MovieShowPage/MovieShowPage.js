@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import {rateMovie} from '../../apiCalls.js'
+import {getOneMovie, rateMovie} from '../../apiCalls.js'
 
 class MovieShowPage extends Component {
   constructor(props) {
@@ -9,8 +9,13 @@ class MovieShowPage extends Component {
     this.state = {
       rating: '',
       wrongInput: '',
-      error: ''
+      error: '',
+      movie: '',
     }
+  }
+
+  componentDidMount = () => {
+    getOneMovie(this.props.movieID).then(response => this.setState(response))
   }
 
   submitRating = () => {
@@ -19,7 +24,7 @@ class MovieShowPage extends Component {
       return;
     }
     const data = {
-      "movie_id": this.props.movie.id,
+      "movie_id": this.props.movieID,
       rating: +this.state.rating
     }
     rateMovie(this.props.userID, data).then(() => this.props.populateUserRatings())
@@ -32,7 +37,7 @@ class MovieShowPage extends Component {
   }
 
   render() {
-    const foundRating = this.props.userMovieRating.find(rating => rating.movie_id === this.props.movie.id)
+    const foundRating = this.props.userMovieRatings.find(rating => rating.movie_id === this.state.movie.id)
     let userRatingSection = '';
 
     if (foundRating) {
@@ -47,19 +52,19 @@ class MovieShowPage extends Component {
 
     return (
       <section className='movie-show-page'>
-        <img className='background' src={this.props.movie.backdrop_path} alt={this.props.movie.title + 'backdrop'}/>
+        <img className='background' src={this.state.movie.backdrop_path} alt={this.state.movie.title + 'backdrop'}/>
         <div className="movie-section">
-          <img className='main-poster' src={this.props.movie.poster_path}  alt={this.props.movie.title + 'poster'}/>
+          <img className='main-poster' src={this.state.movie.poster_path}  alt={this.state.movie.title + 'poster'}/>
           <div className='movie-info'>
-            <h1>{this.props.movie.title}</h1>
-            <h2>Release Date: {this.props.movie.release_date} </h2>
-            <h3>Rating: {parseFloat(this.props.movie.average_rating).toFixed(1)} </h3>
+            <h1>{this.state.movie.title}</h1>
+            <h2>Release Date: {this.state.movie.release_date} </h2>
+            <h3>Rating: {parseFloat(this.state.movie.average_rating).toFixed(1)} </h3>
             { (this.state.wrongInput || this.state.error) ? <h3>{this.state.wrongInput || this.state.error }</h3> : ''}
             { (this.props.userID) ?
               userRatingSection :
               <h3>Sign in to leave your own rating</h3>
             }
-            <p>{this.props.movie.overview}</p>
+            <p>{this.state.movie.overview}</p>
           </div>
         </div>
       </section>
