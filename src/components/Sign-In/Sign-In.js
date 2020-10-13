@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 
+import {logInUser} from '../../apiCalls.js'
+
 class SignIn extends Component {
   constructor(props){
     super(props);
@@ -22,25 +24,7 @@ class SignIn extends Component {
         email: 'lucy@turing.io',
         password: 'password1'
       }
-      fetch('https://rancid-tomatillos.herokuapp.com/api/v2/log', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-      .then(response => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          this.setState({ wrongInput: '', error: 'Something went wrong on our end' });  
-        }
-      })
-      .then(response => this.props.logIn(response))
-      .catch(error => {
-        console.log('inside catch', error.message)
-        this.setState({ wrongInput: '', error: 'Something went wrong on our end' });
-      })
+      logInUser(data).then(response => this.props.logIn(response))
     } else {
       this.setState({ wrongInput: 'Wrong email or password' });
     }

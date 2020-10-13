@@ -22,7 +22,6 @@ class MovieShowPage extends Component {
       "movie_id": this.props.movie.id,
       rating: +this.state.rating
     }
-    console.log(this.props)
     rateMovie(this.props.userID, data).then(() => this.props.populateUserRatings())
     this.setState({rating: '', wrongInput: '', error: ''});
   }

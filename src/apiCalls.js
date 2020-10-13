@@ -74,3 +74,24 @@ export const rateMovie = (id, data, updateRating) => {
     return { wrongInput: '', error: 'We were not able to save your rating. Please refresh and try again.'}
   })
 }
+
+export const logInUser = (data) => {
+  return fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw Error
+    }
+  })
+  .catch(error => {
+    console.log('inside catch', error.message)
+    this.setState({ wrongInput: '', error: 'Something went wrong on our end' });
+  })
+}
