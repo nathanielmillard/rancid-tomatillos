@@ -53,3 +53,24 @@ export const getUserRatings = (id) => {
       return {error: 'Something went wrong getting your movie reviews'}
     })
 }
+
+export const rateMovie = (id, data, updateRating) => {
+  return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw Error
+    }
+  })
+  .catch(error => {
+    console.log(error);
+    return { wrongInput: '', error: 'We were not able to save your rating. Please refresh and try again.'}
+  })
+}

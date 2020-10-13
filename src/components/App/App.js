@@ -43,7 +43,7 @@ class App extends Component {
 				)
 		}
 		if (this.state.error === '') {
-			return <MovieShowPage movie={this.state.foundMovie} userMovieRating={this.state.ratings} userID={this.state.id} getUserRatings={this.getUserRatings} />
+			return <MovieShowPage movie={this.state.foundMovie} userMovieRating={this.state.ratings} userID={this.state.id} populateUserRatings={this.populateUserRatings} />
 		} else {
 			return <h1> {this.state.error} </h1>
 		}

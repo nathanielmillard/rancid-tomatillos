@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import {rateMovie} from '../../apiCalls.js'
+
 class MovieShowPage extends Component {
   constructor(props) {
     super(props);
@@ -20,25 +22,8 @@ class MovieShowPage extends Component {
       "movie_id": this.props.movie.id,
       rating: +this.state.rating
     }
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${this.props.userID}/rat`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        this.setState({ wrongInput: '', error: 'We were not able to save your rating. Please refresh and try again.'})
-      }
-    })
-    .then(() => this.props.getUserRatings())
-    .catch(error => {
-      console.log(error);
-      this.setState({ wrongInput: '', error: 'We were not able to save your rating. Please refresh and try again.'})
-    })
+    console.log(this.props)
+    rateMovie(this.props.userID, data).then(() => this.props.populateUserRatings())
     this.setState({rating: '', wrongInput: '', error: ''});
   }
 
@@ -50,17 +35,17 @@ class MovieShowPage extends Component {
   render() {
     const foundRating = this.props.userMovieRating.find(rating => rating.movie_id === this.props.movie.id)
     let userRatingSection = '';
-    
+
     if (foundRating) {
       userRatingSection = <h3 className='movie-user-rating'>Your Rating: {foundRating.rating}</h3>
     } else {
-      userRatingSection = 
+      userRatingSection =
       <label htmlFor='rating'>Rate this movie:
         <input name='rating' type='number' min='1' max='10' onChange={this.updateRatingInput} />
         <button onClick={this.submitRating}>Submit</button>
       </label>
-    } 
-              
+    }
+
     return (
       <section className='movie-show-page'>
         <img className='background' src={this.props.movie.backdrop_path} alt={this.props.movie.title + 'backdrop'}/>
