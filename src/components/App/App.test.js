@@ -1,28 +1,22 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import { render, screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
+import {getAllMovies} from '../../apiCalls.js'
 
 import App from './App';
 
+// jest.mock('../../apiCalls.js')
+
+
 describe('App', () => {
-  it('Should have default test', () => {
-    expect(true).toBe(true);
-  });
-
-  it('Should render App to the screen', () => {
-    render(<BrowserRouter>
-      <App />
-    </BrowserRouter>);
-  });
-
   it('Should display a loading message until fetch has finished', () => {
-    render(<BrowserRouter>
+    // getAllMovies.mockResolvedValue(trialMovie)
+    render(<MemoryRouter>
       <App />
-    </BrowserRouter>);
+      </MemoryRouter>);
     expect(screen.getByText('All Movies Trying To Load...')).toBeInTheDocument();
   });
-
   // Add additional tests after async testing lesson
 })

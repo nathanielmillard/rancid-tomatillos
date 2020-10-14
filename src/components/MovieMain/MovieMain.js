@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import MovieTile from '../MovieTile/MovieTile';
 
+import {getAllMovies} from '../../apiCalls.js'
+
 class MovieMain extends Component {
   constructor(props) {
     super(props);
@@ -18,25 +20,11 @@ class MovieMain extends Component {
   }
 
   getAllMovieData = () => {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/mov')
-      .then(response => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          this.setState({ error: 'We encountered an error, please reload page' });
-        }
-      })
-      .then(data => {
-        data.movies.sort((a,b)=>{
-         return b.average_rating - a.average_rating
-        })
-        this.setState({loading: '', movies: data.movies, error: '' })
-      })
-      .catch(error => {
-        console.log(error)
-        this.setState({ error: 'We encountered an error, please reload page' });
-      }
-      );
+    console.log('made it here')
+    getAllMovies().then(response => {
+      this.setState(response)
+      console.log(this.state)
+    })
   }
 
   render() {
