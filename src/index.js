@@ -5,7 +5,7 @@ import App from './components/App/App.js';
 import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 import './variables.scss'
-import './App.scss';
+import './components/App/App.scss';
 
 ReactDOM.render(
   <React.StrictMode>
