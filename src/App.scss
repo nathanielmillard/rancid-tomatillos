@@ -35,6 +35,10 @@ main {
     color: $nuetralLightest;
     padding: 1vh;
   }
+  button:hover {
+    color: $brightAccent;
+  }
+
 }
 
 .movie-directory {
@@ -47,17 +51,17 @@ main {
     font-family: $title;
     color: $colorLight;
   }
+  .movie-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 20px;
+    width: 80vw;
+    height: 90vh;
+    overflow: scroll;
+  }
 }
 
-.movie-main {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin: 0 20px;
-  width: 80vw;
-  height: 90vh;
-  overflow: scroll;
-}
 
 .movie-tile {
   width: 200px;
@@ -65,11 +69,18 @@ main {
   margin: 10px;
 
   img {
-    height: 90%
+    height: 90%;
+    filter: drop-shadow(7px 5px 4px $colorDeep);
+    border-radius: 5px;
   }
-
+  img:hover {
+    height: 95%;
+    filter: drop-shadow(4px 5px 4px $colorDeep);
+  }
   .movie-rating, .movie-user-rating {
     text-align: center;
+    color: $colorMedium;
+    font-family: $title;
     padding: 0;
     margin: 0;
   }
@@ -77,8 +88,7 @@ main {
 
 .movie-show-page {
   display: flex;
-  background-color: black;
-  // background-color: black;
+  background-color: $nuetraldarkest;
   .background {
     height: auto;
     width: 80vw;
@@ -94,11 +104,13 @@ main {
     align-self: center;
     display: flex;
     flex-direction: row;
-    opacity: 100%;
     .main-poster {
       height: inherit;
+      filter: drop-shadow(7px 5px 4px $colorDeep);
     }
     .movie-info{
+      font-family: $body;
+      font-weight: normal;
       color: white;
       display: flex;
       flex-direction: column;
