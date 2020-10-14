@@ -2,13 +2,16 @@ import React, { Component } from 'react'
 
 import MovieTile from '../MovieTile/MovieTile';
 
+import {getAllMovies} from '../../apiCalls.js'
+
 class MovieMain extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       loading: 'All Movies Trying To Load...',
-      movies: []
+      movies: [],
+      error: ''
     }
   }
 
@@ -17,25 +20,11 @@ class MovieMain extends Component {
   }
 
   getAllMovieData = () => {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
-      .then(response => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          alert('Something went wrong with our server')
-        }
-      })
-      .then(data => {
-        data.movies.sort((a,b)=>{
-         return b.average_rating - a.average_rating
-        })
-        this.setState({loading: '', movies: data.movies})
-      })
-      .catch(error => {
-        console.log(error)
-        alert('We encountered an error, please reload page')
-      }
-      );
+    console.log('made it here')
+    getAllMovies().then(response => {
+      this.setState(response)
+      console.log(this.state)
+    })
   }
 
   render() {
@@ -47,6 +36,7 @@ class MovieMain extends Component {
           {
             this.state.loading !== '' ? this.state.loading :  moviesComponents
           }
+          { (this.state.error) ? this.state.error : ''}
         </section>
       </section>
     )
