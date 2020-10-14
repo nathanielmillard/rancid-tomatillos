@@ -11,7 +11,7 @@ const NavBar = (props) => {
 			<Link to='/'><h1 className='navbar-title'>Rancid Tomatillos</h1></Link>
 			{(!props.currentUser) ? signInButton :	signOutButton }
       {
-        (!props.currentUser) ? '' : <h3 className='navbar-current-user'>{props.currentUser}</h3>
+        (!props.currentUser) ? '' : <h3 className='navbar-current-user'>{'Welcome back: ' + props.currentUser}</h3>
       }
 		</section>
 	);

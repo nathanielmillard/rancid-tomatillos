@@ -17,6 +17,7 @@ main {
   background-color: $nuetralMidTone;
   display: flex;
   flex-direction: column;
+  align-items: center;
   h1, a {
     color: $brightAccent;
     font-family: $title;
@@ -34,11 +35,14 @@ main {
     background-color: $nuetraldarkest;
     color: $nuetralLightest;
     padding: 1vh;
+    width: 30%;
   }
   button:hover {
     color: $brightAccent;
   }
-
+  h3 {
+    margin: 1vh;
+  }
 }
 
 .movie-directory {
@@ -109,6 +113,7 @@ main {
       filter: drop-shadow(7px 5px 4px $colorDeep);
     }
     .movie-info{
+      filter: drop-shadow(7px 5px 4px $colorDeep);
       font-family: $body;
       font-weight: normal;
       color: white;
@@ -116,6 +121,16 @@ main {
       flex-direction: column;
       margin-left: 5vw;
       justify-content: center;
+    }
+    button {
+      border: none;
+      border-radius: none;
+      background-color: $nuetraldarkest;
+      color: $nuetralLightest;
+      padding: .25vh;
+    }
+    button:hover {
+      color: $brightAccent;
     }
   }
 }
