@@ -1,9 +1,13 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom';
 
 import SignIn from './Sign-In';
+
+import { logInUser } from '../../apiCalls'
+
+jest.mock('../../apiCalls.js')
 
 describe('Sign-In', () => {
   it("Should render the component", () => {
@@ -14,26 +18,26 @@ describe('Sign-In', () => {
     expect(screen.getByText('Submit')).toBeInTheDocument();
   });
 
-  // This test will work, however it won't work until async testing is introduced.
-  // it("Should log in a user on submit button click with correct credientals", () => {
-  //   const mockSignIn = jest.fn();
-  //   global.alert = jest.fn();
-  //   render(<SignIn logIn={mockSignIn} />)
-  //   userEvent.click(screen.getByText('Submit'));
-  //   expect(screen.getByText('Submit')).toBeInTheDocument();
-  //   expect(mockSignIn).toHaveBeenCalledWith(1);
-  // });
+  it("Should log in a user on submit button click with correct credientals", async () => {
+    const userData = {
+      email: 'lucy@turing.io',
+      password: 'passwor1'
+    }
+    logInUser.mockResolvedValue(userData)
+    const mockSignIn = jest.fn();
+    render(<SignIn logIn={mockSignIn} />)
+    userEvent.type(screen.getByPlaceholderText('email'), userData.email);
+    userEvent.type(screen.getByPlaceholderText('password'), userData.password);
+    userEvent.click(screen.getByText('Submit'));
+    screen.debug();
+    // expect(mockSignIn).toHaveBeenCalled();
+  });
 
-  // Unsure about this one, but I'd imagine it would work with async testing as well
-  // it("Should handle wrong username and password errors", () => {
-    // const mockSignIn = jest.fn();
-    // global.alert = jest.fn();
-    // const mockSignInInfo = {
-    //   email: 'turing@turing.io',
-    //   password: '123456'
-    // }
-    // render(<SignIn logIn={mockSignIn} />);
-    // userEvent.click(screen.getByText('Submit'));
-    // expect(screen.getByRole('alert')).toHaveTextContent('Something went wrong on our end');
-  // });
+  it("Should handle wrong username and password errors", () => {
+    const mockSignIn = jest.fn();
+    render(<SignIn logIn={mockSignIn} />);
+    userEvent.click(screen.getByText('Submit'));
+    const message = screen.getByText('Wrong email or password');
+    expect(message).toBeInTheDocument();
+  });
 })
