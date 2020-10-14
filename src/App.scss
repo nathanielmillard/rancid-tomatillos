@@ -14,23 +14,38 @@ main {
 .navbar-component {
   min-width: 20vw;
   height: 100vh;
-  background-color: $nuetralLightest;
-  h1, Link {
+  background-color: $nuetralMidTone;
+  display: flex;
+  flex-direction: column;
+  h1, a {
     color: $brightAccent;
     font-family: $title;
     font-style: normal;
     text-decoration: none;
     align-self: center;
+    margin: 1vh;
   }
-
+  h1:hover {
+    color: $nuetralLightest;
+  }
+  button {
+    border: none;
+    border-radius: none;
+    background-color: $nuetraldarkest;
+    color: $nuetralLightest;
+    padding: 1vh;
+  }
 }
 
 .movie-directory {
+  background-color: $nuetraldarkest;
   display: flex;
   flex-direction: column;
-
   h2 {
-    margin-left: 20px
+    margin: 1vh;
+    margin-left: 20px;
+    font-family: $title;
+    color: $colorLight;
   }
 }
 
