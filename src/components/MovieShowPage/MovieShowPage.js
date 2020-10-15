@@ -50,11 +50,12 @@ class MovieShowPage extends Component {
       </label>
     }
 
+    console.log(this.props.userMovieRatings);
     return (
       <section className='movie-show-page'>
         <img className='background' src={this.state.movie.backdrop_path} alt={this.state.movie.title + 'backdrop'}/>
         <div className="movie-section">
-          <img className='main-poster' src={this.state.movie.poster_path}  alt={this.state.movie.title + 'poster'}/>
+          <img className='main-poster' src={this.state.movie.poster_path}  alt={this.state.movie.title + ' Poster'}/>
           <div className='movie-info'>
             <h1>{this.state.movie.title}</h1>
             <h2>Release Date: {this.state.movie.release_date} </h2>
