@@ -1,6 +1,6 @@
 export const getAllMovies = () => {
   return fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
-      .then ( response => {
+    .then(response => {
       if (response.ok) {
         return response.json()
       } else {
@@ -9,7 +9,7 @@ export const getAllMovies = () => {
     })
     .then(data => {
       data.movies.sort((a,b)=>{
-       return b.average_rating - a.average_rating
+        return b.average_rating - a.average_rating
       })
       return({loading: '', movies: data.movies, error: '' })
     })
@@ -17,7 +17,7 @@ export const getAllMovies = () => {
       console.log(error)
       return({ error: 'We encountered an error, please reload page' });
     }
-    );
+  );
 }
 
 export const getOneMovie = (movieID) => {
@@ -54,7 +54,7 @@ export const getUserRatings = (id) => {
     })
 }
 
-export const rateMovie = (id, data, updateRating) => {
+export const rateMovie = (id, data) => {
   return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`, {
     method: 'POST',
     headers: {
@@ -95,3 +95,5 @@ export const logInUser = (data) => {
     this.setState({ wrongInput: '', error: 'Something went wrong on our end' });
   })
 }
+
+
