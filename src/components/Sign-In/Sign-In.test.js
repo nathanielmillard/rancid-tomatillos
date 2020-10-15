@@ -21,7 +21,7 @@ describe('Sign-In', () => {
   it("Should log in a user on submit button click with correct credientals", async () => {
     const userData = {
       email: 'lucy@turing.io',
-      password: 'passwor1'
+      password: 'password1'
     }
     logInUser.mockResolvedValue(userData)
     const mockSignIn = jest.fn();
@@ -29,8 +29,6 @@ describe('Sign-In', () => {
     userEvent.type(screen.getByPlaceholderText('email'), userData.email);
     userEvent.type(screen.getByPlaceholderText('password'), userData.password);
     userEvent.click(screen.getByText('Submit'));
-    screen.debug();
-    // expect(mockSignIn).toHaveBeenCalled();
   });
 
   it("Should handle wrong username and password errors", () => {
