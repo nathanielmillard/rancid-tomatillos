@@ -1,9 +1,9 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render, waitFor} from '@testing-library/react';
+import { screen, render, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
-import { getOneMovie, getUserRatings, rateMovie } from '../../apiCalls.js'
+import { getOneMovie, getUserRatings, logInUser, rateMovie } from '../../apiCalls.js';
 
 import MovieShowPage from './MovieShowPage';
 
@@ -37,16 +37,21 @@ const trialRating = {
 
 const trialSubmitRating = {
   "movie_id": 659986,
-  rating: 4
+  rating: 1
 }
 
 const trialRating2 = {
   "id": 2569,
   "user_id": 78,
   "movie_id": 659986,
-  "rating": 4,
+  "rating": 1,
   "created_at": "2020-10-10T20:21:26.684Z",
   "updated_at": "2020-10-10T20:21:26.684Z"
+}
+
+const userData = {
+  email: 'lucy@turing.io',
+  password: 'password1'
 }
 
 describe('MovieShowPage', () => {
@@ -128,28 +133,39 @@ describe('MovieShowPage', () => {
     })
     
     it('Should allow a user to submit a new rating', async () => {
-      //   getOneMovie.mockResolvedValueOnce(trialMovie);
-      //   rateMovie.mockResolvedValueOnce(trialSubmitRating);
-      //   getUserRatings.mockResolvedValueOnce(trialRating2);
-      //   const mockSubmitRating = jest.fn();
-      //   const mockUserRatings = jest.fn();
-      //   const { getByText, getByRole } = render(
-        //     <MemoryRouter>
-        //       <MovieShowPage
-        //         movieID={trialMovie.movie.id}
-        // 				userMovieRatings={[]}
-        // 				userID={78}
-        // 				populateUserRatings={mockUserRatings}
-        //       />
-        //     </MemoryRouter>)
-        //   const title = await waitFor(() => getByText('The Owners'));
-        //   const formTitle = await waitFor(() => getByText('Rate this movie:'));
-        //   expect(title).toBeInTheDocument();
-        //   expect(formTitle).toBeInTheDocument();
-        //   // get input value from input box before submission
-    //   userEvent.click(getByRole('button', { name : 'Submit'}));
-    //   const newRating = await waitFor(() => getByText('Your Rating: 4'));
-    //   expect(newRating).toBeInTheDocument();
+      getOneMovie.mockResolvedValueOnce(trialMovie);
+      logInUser.mockResolvedValueOnce(userData);
+      rateMovie.mockResolvedValueOnce(78, trialSubmitRating);
+      const mockUserRatings = jest.fn();
+      const { getByText, getByRole, getByTestId } = render(
+        <MemoryRouter>
+            <MovieShowPage
+              movieID={trialMovie.movie.id}
+              userMovieRatings={[]}
+              userID={78}
+              populateUserRatings={mockUserRatings}
+              />
+          </MemoryRouter>)
+      const title = await waitFor(() => getByText('The Owners'));
+      const formTitle = await waitFor(() => getByText('Rate this movie:'));
+      expect(title).toBeInTheDocument();
+      expect(formTitle).toBeInTheDocument();
+      userEvent.type(getByTestId('rating'), '1');
+      expect(getByTestId('rating')).toHaveValue(1);
+      userEvent.click(getByRole('button'));
+      getUserRatings.mockResolvedValueOnce(trialRating2);
+      getOneMovie.mockResolvedValueOnce(trialMovie);
+      render(
+        <MemoryRouter>
+            <MovieShowPage
+              movieID={trialMovie.movie.id}
+              userMovieRatings={[trialRating2]}
+              userID={78}
+              populateUserRatings={mockUserRatings}
+              />
+          </MemoryRouter>)
+      const newMovieRating = await waitFor(() => getByText('Your Rating: 1'));
+      expect(newMovieRating).toBeInTheDocument();
     })
   })
 })
