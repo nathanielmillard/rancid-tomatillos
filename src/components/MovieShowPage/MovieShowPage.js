@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import {getOneMovie, rateMovie} from '../../apiCalls.js'
+import { getOneMovie, rateMovie, deleteMovieRating } from '../../apiCalls.js'
 
 import './MovieShowPage.scss'
 
@@ -38,6 +38,18 @@ class MovieShowPage extends Component {
     this.setState({ [name]: value})
   }
 
+  deleteRating = () => {
+    const foundRating = this.props.userMovieRatings.find(movie => movie.movie_id === this.state.movie.id);
+    if (foundRating) {
+      deleteMovieRating(this.props.userID, foundRating.id).then(() => {
+        this.props.populateUserRatings()
+      });
+
+    } else {
+      this.setState({error : 'We were not able to delete your rating.'});
+    }
+  }
+
   render() {
     const foundRating = this.props.userMovieRatings.find(rating => rating.movie_id === this.state.movie.id)
     let userRatingSection = '';
@@ -45,7 +57,11 @@ class MovieShowPage extends Component {
     let movieBackdropAlt = 'No Backdrop Image Found'
 
     if (foundRating) {
-      userRatingSection = <h3 className='movie-user-rating'>Your Rating: {foundRating.rating}</h3>
+      userRatingSection = 
+      <section>
+        <h3 className='movie-user-rating'>Your Rating: {foundRating.rating}</h3>
+        <button className='delete-user-rating' onClick={this.deleteRating}>Delete Rating</button>
+      </section>
     } else {
       userRatingSection =
       <label htmlFor='rating'>Rate this movie:
