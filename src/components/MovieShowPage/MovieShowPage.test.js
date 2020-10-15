@@ -35,6 +35,20 @@ const trialRating = {
   "updated_at": "2020-10-10T20:21:26.684Z"
 }
 
+const trialSubmitRating = {
+  "movie_id": 659986,
+  rating: 4
+}
+
+const trialRating2 = {
+  "id": 2569,
+  "user_id": 78,
+  "movie_id": 659986,
+  "rating": 4,
+  "created_at": "2020-10-10T20:21:26.684Z",
+  "updated_at": "2020-10-10T20:21:26.684Z"
+}
+
 describe('MovieShowPage', () => {
   describe('Unit Testing', () => {
     it('Should render a movie to the page', async () => {
@@ -93,7 +107,6 @@ describe('MovieShowPage', () => {
     })
     
     it('Should inform a user of how to submit a rating with wrong input', async () => {
-      // get input value from input box before submission
       getOneMovie.mockResolvedValueOnce(trialMovie);
       const mockUserRatings = jest.fn();
       const { getByText, getByRole } = render(
@@ -112,6 +125,31 @@ describe('MovieShowPage', () => {
       userEvent.click(getByRole('button', { name : 'Submit'}));
       const message = await waitFor(() => getByText('The number can only be a whole number between 1 and 10'));
       expect(message).toBeInTheDocument();
+    })
+    
+    it('Should allow a user to submit a new rating', async () => {
+      //   getOneMovie.mockResolvedValueOnce(trialMovie);
+      //   rateMovie.mockResolvedValueOnce(trialSubmitRating);
+      //   getUserRatings.mockResolvedValueOnce(trialRating2);
+      //   const mockSubmitRating = jest.fn();
+      //   const mockUserRatings = jest.fn();
+      //   const { getByText, getByRole } = render(
+        //     <MemoryRouter>
+        //       <MovieShowPage
+        //         movieID={trialMovie.movie.id}
+        // 				userMovieRatings={[]}
+        // 				userID={78}
+        // 				populateUserRatings={mockUserRatings}
+        //       />
+        //     </MemoryRouter>)
+        //   const title = await waitFor(() => getByText('The Owners'));
+        //   const formTitle = await waitFor(() => getByText('Rate this movie:'));
+        //   expect(title).toBeInTheDocument();
+        //   expect(formTitle).toBeInTheDocument();
+        //   // get input value from input box before submission
+    //   userEvent.click(getByRole('button', { name : 'Submit'}));
+    //   const newRating = await waitFor(() => getByText('Your Rating: 4'));
+    //   expect(newRating).toBeInTheDocument();
     })
   })
 })
