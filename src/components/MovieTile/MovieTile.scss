@@ -1,0 +1,26 @@
+@import '../../variables';
+
+.movie-tile {
+  width: 200px;
+  height: 300px;
+  margin: 1.5vw;
+
+  img {
+    height: 90%;
+    filter: drop-shadow(7px 5px 4px $colorDeep);
+    border-radius: 5px;
+  }
+  img:hover {
+    height: 93%;
+    filter: drop-shadow(4px 5px 4px $colorDeep);
+  }
+  .movie-rating {
+    margin-top: .5vh;
+  }
+  .movie-rating, .movie-user-rating {
+    text-align: center;
+    color: $colorMedium;
+    font-family: $title;
+    padding: 0;
+  }
+}

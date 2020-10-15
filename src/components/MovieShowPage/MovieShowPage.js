@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import {getOneMovie, rateMovie} from '../../apiCalls.js'
 
+import './MovieShowPage.scss'
+
 class MovieShowPage extends Component {
   constructor(props) {
     super(props);
@@ -39,6 +41,8 @@ class MovieShowPage extends Component {
   render() {
     const foundRating = this.props.userMovieRatings.find(rating => rating.movie_id === this.state.movie.id)
     let userRatingSection = '';
+    let movieBackdrop = '';
+    let movieBackdropAlt = 'No Backdrop Image Found'
 
     if (foundRating) {
       userRatingSection = <h3 className='movie-user-rating'>Your Rating: {foundRating.rating}</h3>
@@ -50,9 +54,14 @@ class MovieShowPage extends Component {
       </label>
     }
 
+    if (this.state.movie.backdrop_path && !this.state.movie.backdrop_path.includes('NoPhotoAvailable')){
+      movieBackdrop = this.state.movie.backdrop_path
+      movieBackdropAlt = this.state.movie.title + ' backdrop'
+    }
+
     return (
       <section className='movie-show-page'>
-        <img className='background' src={this.state.movie.backdrop_path} alt={this.state.movie.title + 'backdrop'}/>
+        <img className='background' src={movieBackdrop} alt={movieBackdropAlt}/>
         <div className="movie-section">
           <img className='main-poster' src={this.state.movie.poster_path}  alt={this.state.movie.title + 'poster'}/>
           <div className='movie-info'>

@@ -1,0 +1,37 @@
+@import '../../variables';
+
+.sign-in-form{
+  width: 30vw;
+  height: 50vh;
+  margin-top: 25vh;
+  margin-bottom: 25vh;
+  margin-left: 25%;
+  background-color: $colorLight;
+  border: 5px;
+  border-radius: 10%;
+  border-color: $nuetralLightest;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  label{
+    font-family: $body;
+    color: $colorDeep;
+    font-size: 1.5rem;
+  }
+  input{
+    height: 1.6rem;
+    padding: 4px;
+  }
+  button {
+    border: none;
+    border-radius: none;
+    background-color: $nuetraldarkest;
+    color: $nuetralLightest;
+    padding: .25vh;
+    margin: 2vh;
+  }
+  button:hover {
+    color: $brightAccent;
+  }
+}

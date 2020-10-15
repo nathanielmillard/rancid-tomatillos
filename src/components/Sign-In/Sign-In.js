@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 
 import {logInUser} from '../../apiCalls.js'
 
+import './Sign-In.scss'
+
 class SignIn extends Component {
   constructor(props){
     super(props);
@@ -32,7 +34,7 @@ class SignIn extends Component {
 
   render () {
     return (
-      <form>
+      <form className='sign-in-form'>
         <label htmlFor='email'>Email</label>
         <input name='email' type='text' onChange={this.updateState}/>
         <label htmlFor='password'>Password</label>
