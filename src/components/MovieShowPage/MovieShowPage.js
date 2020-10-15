@@ -40,7 +40,13 @@ class MovieShowPage extends Component {
 
   deleteRating = () => {
     const foundRating = this.props.userMovieRatings.find(movie => movie.movie_id === this.state.movie.id);
+    console.log('foundRating', foundRating);
+    console.log('movie.movie_id', this.props.userMovieRatings[0].movie_id);
+    console.log('this.state.movie.id', this.state.movie.id);
+    console.log('this.props.userID', this.props.userID);
+    console.log('foundRating.id', foundRating.id);
     if (foundRating) {
+      console.log(deleteMovieRating(this.props.userID, foundRating.id))
       deleteMovieRating(this.props.userID, foundRating.id).then(() => {
         this.props.populateUserRatings()
       });
@@ -65,7 +71,7 @@ class MovieShowPage extends Component {
     } else {
       userRatingSection =
       <label htmlFor='rating'>Rate this movie:
-        <input name='rating' type='number' min='1' max='10' onChange={this.updateRatingInput} />
+        <input data-testid='rating' name='rating' type='number' min='1' max='10' onChange={this.updateRatingInput} />
         <button onClick={this.submitRating}>Submit</button>
       </label>
     }

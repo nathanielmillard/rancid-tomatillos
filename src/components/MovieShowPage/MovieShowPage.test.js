@@ -1,9 +1,9 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { screen, render, waitFor, fireEvent } from '@testing-library/react';
+import { screen, render, waitFor, fireEvent, getByRole } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
-import { getOneMovie, getUserRatings, logInUser, rateMovie } from '../../apiCalls.js';
+import { getOneMovie, getUserRatings, logInUser, rateMovie, deleteMovieRating } from '../../apiCalls.js';
 
 import MovieShowPage from './MovieShowPage';
 
@@ -166,6 +166,44 @@ describe('MovieShowPage', () => {
           </MemoryRouter>)
       const newMovieRating = await waitFor(() => getByText('Your Rating: 1'));
       expect(newMovieRating).toBeInTheDocument();
+    })
+    
+    it('Should allow a user to delete their rating', async () => {
+      getOneMovie.mockResolvedValueOnce(trialMovie);
+      getUserRatings.mockResolvedValueOnce(trialRating);
+      const mockUserRatings = jest.fn();
+      const { getByText, getByRole } = render(
+        <MemoryRouter>
+          <MovieShowPage
+            movieID={trialMovie.movie.id}
+						userMovieRatings={[trialRating]}
+						userID={78}
+						populateUserRatings={mockUserRatings}
+          />
+        </MemoryRouter>)
+      const title = await waitFor(() => getByText('The Owners'));
+      const userRating = await waitFor(() => getByText('Your Rating: 9'));
+      expect(title).toBeInTheDocument();
+      expect(userRating).toBeInTheDocument();
+      screen.debug();
+      console.log(trialRating.user_id, trialRating.id);
+      userEvent.click(getByRole('button', { name : 'Delete Rating'}));
+      const mockPromise = new Promise((resolve, reject) => { resolve(204)})
+      deleteMovieRating.mockResolvedValueOnce(mockPromise); // The server does not return a value, it returns a promise, so we are attempting to return a Promise so that our then can perform re-populating the user ratings array.
+      getOneMovie.mockResolvedValueOnce(trialMovie);
+      render(
+        <MemoryRouter>
+          <MovieShowPage
+            movieID={trialMovie.movie.id}
+						userMovieRatings={[]}
+						userID={78}
+						populateUserRatings={mockUserRatings}
+          />
+        </MemoryRouter>)
+      const newTitle = await waitFor(() => getByText('The Owners'));
+      const newFormTitle = await waitFor(() => getByText('Rate this movie:'));
+      expect(newTitle).toBeInTheDocument();
+      expect(newFormTitle).toBeInTheDocument();
     })
   })
 })
