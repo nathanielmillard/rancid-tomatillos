@@ -91,5 +91,27 @@ describe('MovieShowPage', () => {
       expect(title).toBeInTheDocument();
       expect(formTitle).toBeInTheDocument();
     })
+    
+    it('Should inform a user of how to submit a rating with wrong input', async () => {
+      // get input value from input box before submission
+      getOneMovie.mockResolvedValueOnce(trialMovie);
+      const mockUserRatings = jest.fn();
+      const { getByText, getByRole } = render(
+        <MemoryRouter>
+          <MovieShowPage
+            movieID={trialMovie.movie.id}
+						userMovieRatings={[]}
+						userID={78}
+						populateUserRatings={mockUserRatings}
+          />
+        </MemoryRouter>)
+      const title = await waitFor(() => getByText('The Owners'));
+      const formTitle = await waitFor(() => getByText('Rate this movie:'));
+      expect(title).toBeInTheDocument();
+      expect(formTitle).toBeInTheDocument();
+      userEvent.click(getByRole('button', { name : 'Submit'}));
+      const message = await waitFor(() => getByText('The number can only be a whole number between 1 and 10'));
+      expect(message).toBeInTheDocument();
+    })
   })
 })
