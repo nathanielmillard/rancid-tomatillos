@@ -73,5 +73,23 @@ describe('MovieShowPage', () => {
       expect(title).toBeInTheDocument();
       expect(userRating).toBeInTheDocument();
     })
+    
+    it('Should render a form that a user can submit a rating if one is not found', async () => {
+      getOneMovie.mockResolvedValueOnce(trialMovie);
+      const mockUserRatings = jest.fn();
+      const { getByText } = render(
+        <MemoryRouter>
+          <MovieShowPage
+            movieID={trialMovie.movie.id}
+						userMovieRatings={[]}
+						userID={78}
+						populateUserRatings={mockUserRatings}
+          />
+        </MemoryRouter>)
+      const title = await waitFor(() => getByText('The Owners'));
+      const formTitle = await waitFor(() => getByText('Rate this movie:'));
+      expect(title).toBeInTheDocument();
+      expect(formTitle).toBeInTheDocument();
+    })
   })
 })
