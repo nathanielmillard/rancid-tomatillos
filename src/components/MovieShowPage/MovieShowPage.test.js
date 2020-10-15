@@ -26,6 +26,15 @@ const trialMovie = {
   }
 }
 
+const trialRating = {
+  "id": 2569,
+  "user_id": 78,
+  "movie_id": 659986,
+  "rating": 9,
+  "created_at": "2020-10-10T20:21:26.684Z",
+  "updated_at": "2020-10-10T20:21:26.684Z"
+}
+
 describe('MovieShowPage', () => {
   describe('Unit Testing', () => {
     it('Should render a movie to the page', async () => {
@@ -44,6 +53,25 @@ describe('MovieShowPage', () => {
       const image = getByAltText('The Owners Poster');
       expect(title).toBeInTheDocument();
       expect(image).toBeInTheDocument();
+    })
+    
+    it('Should render a user rating if they have rated this movie', async () => {
+      getOneMovie.mockResolvedValueOnce(trialMovie);
+      getUserRatings.mockResolvedValueOnce(trialRating);
+      const mockUserRatings = jest.fn();
+      const { getByText } = render(
+        <MemoryRouter>
+          <MovieShowPage
+            movieID={trialMovie.movie.id}
+						userMovieRatings={[trialRating]}
+						userID={78}
+						populateUserRatings={mockUserRatings}
+          />
+        </MemoryRouter>)
+      const title = await waitFor(() => getByText('The Owners'));
+      const userRating = await waitFor(() => getByText('Your Rating: 9'));
+      expect(title).toBeInTheDocument();
+      expect(userRating).toBeInTheDocument();
     })
   })
 })
