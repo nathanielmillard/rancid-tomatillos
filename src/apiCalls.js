@@ -96,4 +96,12 @@ export const logInUser = (data) => {
   })
 }
 
-
+export const deleteMovieRating = (id, ratingID) => {
+  return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings/${ratingID}`, {
+    method: 'DELETE'
+  })
+  .catch(error => {
+    console.log(error);
+    return { wrongInput: '', error: 'We were not able to delete your rating. Please refresh and try again.'}
+  })
+}
