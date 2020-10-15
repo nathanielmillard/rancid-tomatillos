@@ -34,9 +34,9 @@ class SignIn extends Component {
     return (
       <form>
         <label htmlFor='email'>Email</label>
-        <input name='email' type='text' onChange={this.updateState}/>
+        <input name='email' type='text' placeholder='email' onChange={this.updateState}/>
         <label htmlFor='password'>Password</label>
-        <input name='password' type='password' onChange={this.updateState}/>
+        <input name='password' type='password' placeholder='password' onChange={this.updateState}/>
         <button onClick={this.evaluateUser}>Submit</button>
         { (this.state.wrongInput || this.state.error) ? <h3>{this.state.wrongInput || this.state.error }</h3> : ''}
       </form>

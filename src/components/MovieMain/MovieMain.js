@@ -20,10 +20,8 @@ class MovieMain extends Component {
   }
 
   getAllMovieData = () => {
-    console.log('made it here')
     getAllMovies().then(response => {
       this.setState(response)
-      console.log(this.state)
     })
   }
 
