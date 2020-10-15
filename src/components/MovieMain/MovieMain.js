@@ -4,6 +4,8 @@ import MovieTile from '../MovieTile/MovieTile';
 
 import {getAllMovies} from '../../apiCalls.js'
 
+import './MovieMain.scss'
+
 class MovieMain extends Component {
   constructor(props) {
     super(props);

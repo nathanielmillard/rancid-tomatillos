@@ -1,0 +1,22 @@
+@import '../../variables';
+
+.movie-directory {
+  background-color: $nuetraldarkest;
+  display: flex;
+  flex-direction: column;
+  h2 {
+    margin: 1vh;
+    margin-left: 20px;
+    font-family: $title;
+    color: $colorLight;
+  }
+  .movie-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 20px;
+    width: 80vw;
+    height: 90vh;
+    overflow: scroll;
+  }
+}

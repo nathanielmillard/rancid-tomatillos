@@ -1,0 +1,41 @@
+@import '../../variables';
+
+.navbar-component {
+  min-width: 20vw;
+  height: 100vh;
+  background-color: $nuetralMidTone;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1, a {
+    color: $brightAccent;
+    font-family: $title;
+    font-style: normal;
+    text-decoration: none;
+    align-self: center;
+    margin: 1vh;
+  }
+  h1:hover {
+    color: $nuetralLightest;
+  }
+  button {
+    border: none;
+    border-radius: none;
+    background-color: $nuetraldarkest;
+    color: $nuetralLightest;
+    padding: 1vh;
+    width: inherit;
+  }
+  button:hover {
+    color: $brightAccent;
+  }
+  h3 {
+    margin: 1vh;
+    color: $colorLight;
+    font-family: $body;
+  }
+  .hidden-link {
+    padding: 0;
+    margin: 0;
+  }
+}
