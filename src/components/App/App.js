@@ -39,14 +39,37 @@ class App extends Component {
 
 	render() {
 		return (
-			<main>
-				<Navbar
-					currentUser={this.state.currentUser}
-					signOut={this.logOutUser}
-				/>
-				{this.state.error && <h3>{this.state.error}</h3>}
-				<Switch>
-					<Route exact path='/' render={() => <MovieMain currentUser={this.state} />} />
+			<Switch>
+				<Route exact path='/' render={() => {
+						return(
+							<main>
+								<Navbar
+									currentUser={this.state.currentUser}
+									signOut={this.logOutUser}
+									favoriteView={false}
+								/>
+								{this.state.error && <h3>{this.state.error}</h3>}
+								<MovieMain
+									currentUser={this.state}
+								/>
+							</main>
+						)}
+					}/>
+					<Route exact path='/favorites' render={() =>{
+						return (
+							<main>
+								<Navbar
+									currentUser={this.state.currentUser}
+									signOut={this.logOutUser}
+									favoriteView={true}
+								/>
+								{this.state.error && <h3>{this.state.error}</h3>}
+								<MovieMain
+									currentUser={this.state}
+								/>
+							</main>
+						)}
+					}/>
 					<Route
 						exact
 						path='/sign-in'
@@ -61,15 +84,23 @@ class App extends Component {
 					<Route exact path='/MovieShowPage/:movieID'
 					render={({match}) => {
 						const movieID = match.params.movieID
-						return <MovieShowPage
-						movieID={movieID}
-						userMovieRatings={this.state.ratings}
-						userID={this.state.id}
-						populateUserRatings={this.populateUserRatings}
-						/>
-					}}/>
-				</Switch>
-			</main>
+						return (
+							<main>
+								<Navbar
+									currentUser={this.state.currentUser}
+									signOut={this.logOutUser}
+									favoriteView={false}
+								/>
+								<MovieShowPage
+									movieID={movieID}
+									userMovieRatings={this.state.ratings}
+									userID={this.state.id}
+									populateUserRatings={this.populateUserRatings}
+								/>
+							</main>
+						)}
+					}/>
+			</Switch>
 		);
 	}
 }
