@@ -1,6 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
+import PropTypes from 'prop-types';
+
 import './MovieTile.scss'
 
 const MovieTile = (props) => {
@@ -17,3 +19,7 @@ const MovieTile = (props) => {
 }
 
 export default MovieTile;
+
+MovieTile.propTypes = {
+  movie: PropTypes.object.isRequired
+}

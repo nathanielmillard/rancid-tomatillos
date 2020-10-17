@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 
 import {logInUser} from '../../apiCalls.js'
+import PropTypes from 'prop-types';
 
 import './Sign-In.scss'
 
@@ -47,3 +48,7 @@ class SignIn extends Component {
 }
 
 export default SignIn
+
+SignIn.propTypes = {
+  logIn: PropTypes.func.isRequired
+}

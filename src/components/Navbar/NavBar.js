@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Link } from 'react-router-dom'
 
+import PropTypes from 'prop-types';
+
 import './Navbar.scss'
 
 const NavBar = (props) => {
@@ -20,3 +22,8 @@ const NavBar = (props) => {
 };
 
 export default NavBar;
+
+NavBar.propTypes = {
+	currentUser: PropTypes.string,
+	signOut: PropTypes.func.isRequired,
+}
