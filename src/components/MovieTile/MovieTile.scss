@@ -4,7 +4,6 @@
   width: 200px;
   height: 300px;
   margin: 1.5vw;
-
   img {
     height: 90%;
     filter: drop-shadow(7px 5px 4px $colorDeep);
@@ -22,5 +21,19 @@
     color: $colorMedium;
     font-family: $title;
     padding: 0;
+  }
+  .movie-tile-footer{
+    display: flex;
+    flex-direction: row;
+    height: 4vh;
+    img{
+      height: 70%;
+      margin: 3%;
+      margin-right: 5%;
+    }
+    button{
+      background: none;
+      border: none;
+    }
   }
 }
