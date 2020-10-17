@@ -15,6 +15,16 @@ export default class CommentsContainer extends Component {
   //  get all comments
 
   // submit comment
+  submitComment = () => {
+    const commentData = {
+      id: Date.now(),
+      author: this.props.userID,
+      comment: this.state.comment,
+      created_at: Date.now()
+    };
+    this.setState({ comments: [...this.state.comments, commentData.comment] });
+    this.resetInputs();
+  }
 
   // updateCommentsState
   handleChange = (event) => {
@@ -24,26 +34,30 @@ export default class CommentsContainer extends Component {
 
   // reset inputs
   resetInputs = () => {
-    this.setState({ title: '', comment: ''});
+    this.setState({ comment: ''});
   }
 
   render() {
     return (
       <>
       {
-        (this.props.userID) ?
+        (!this.props.userID) ?
         <form>
           <label htmlFor='comment'>Comment:</label>
           <textarea rows='2' name='comment' value={this.state.comment} onChange={this.handleChange} />
-          <button type='button'>Submit</button>
+          <button type='button' onClick={() => this.submitComment()}>Submit</button>
         </form> :
         <h2>Login to comment on this movie!</h2>
       }
         {
-          (this.state.comments.length > 1) ? '' 
+          (this.state.comments.length < 1) ? '' 
           :
           <section className='comments'>
-            <Comment />
+            {
+              this.state.comments.map(comment => {
+                return <Comment comment={comment} />
+              })
+            }
           </section>
         }
       </>
