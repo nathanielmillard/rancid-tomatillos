@@ -105,3 +105,28 @@ export const deleteMovieRating = (id, ratingID) => {
     return { wrongInput: '', error: 'We were not able to delete your rating. Please refresh and try again.'}
   })
 }
+
+export const addFavoriteMovie = (movie) => {
+  return fetch('http://localhost:3001/api/v1/favorites', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(
+      {
+        id: movie.id
+      }
+    )
+  })
+    .then(response => {
+      if (response.ok) {
+        console.log(response)
+        return response.json()
+      } else {
+        throw Error
+      }
+    })
+    .catch(error => {
+      console.log('inside catch', error.message)
+    })
+}
