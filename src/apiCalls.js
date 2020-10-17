@@ -106,7 +106,7 @@ export const deleteMovieRating = (id, ratingID) => {
   })
 }
 
-export const addFavoriteMovie = (movie) => {
+export const toggleFavoriteMovie = (movie) => {
   return fetch('http://localhost:3001/api/v1/favorites', {
     method: 'POST',
     headers: {
@@ -131,7 +131,7 @@ export const addFavoriteMovie = (movie) => {
     })
 }
 
-export const getFavoriteMovies = () => {
+export const getUserFavorites = () => {
   return fetch('http://localhost:3001/api/v1/favorites')
   .then(response => {
     if (response.ok) {
