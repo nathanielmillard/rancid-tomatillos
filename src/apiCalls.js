@@ -105,3 +105,29 @@ export const deleteMovieRating = (id, ratingID) => {
     return { wrongInput: '', error: 'We were not able to delete your rating. Please refresh and try again.'}
   })
 }
+
+export const getAllMovieComments = (movieID) => {
+  return fetch(`http://localhost:3001/api/v1/movies/${movieID}/comments`)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw Error
+      }
+    })
+    .then(data => {
+      console.log(data);
+      if (data.comments.length < 1) {
+        return { loading: 'There are no comments for this movie'};
+      } else {
+        data.comments.sort((commentA, commentB) => {
+          return commentB.created_at - commentA.created_at;
+         })
+         return { comments: data.comments, error: '' };
+      }
+    })
+    .catch(error => {
+      console.log(error.message);
+      return { error: 'We were unable to get the comments for this movie'};
+    })
+}
