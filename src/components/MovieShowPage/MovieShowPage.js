@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import CommentsContainer from '../CommentsContainer/CommentsContainer'
 import PropTypes from 'prop-types';
 
 import { getOneMovie, rateMovie, deleteMovieRating } from '../../apiCalls.js'
@@ -94,6 +94,9 @@ class MovieShowPage extends Component {
             <p>{this.state.movie.overview}</p>
           </div>
         </div>
+        <section className='comments-container'>
+          <CommentsContainer />
+        </section>
       </section>
     )
   }
