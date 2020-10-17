@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import MovieTile from '../MovieTile/MovieTile';
 
-import {getAllMovies} from '../../apiCalls.js'
+import {getAllMovies, addFavoriteMovie} from '../../apiCalls.js'
 
 import './MovieMain.scss'
 
@@ -28,9 +28,20 @@ class MovieMain extends Component {
       this.setState(response)
     })
   }
-
+  toggleFavorite = (specificMovie) => {
+    addFavoriteMovie(specificMovie)
+  }
   render() {
-    const moviesComponents = this.state.movies.map(movie => <MovieTile key={movie.id} movie={movie} userMovieRating={this.props.currentUser.ratings} />)
+    const moviesComponents = this.state.movies.map(movie => {
+      return (
+        <MovieTile
+          key={movie.id}
+          movie={movie}
+          userMovieRatings={this.props.currentUser.ratings}
+          toggleFavorite={this.toggleFavorite}
+        />
+      )
+    })
     return (
       <section className="movie-directory">
         <h2>Top Rated Movies</h2>
