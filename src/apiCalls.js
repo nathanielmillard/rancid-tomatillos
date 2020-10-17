@@ -130,3 +130,17 @@ export const addFavoriteMovie = (movie) => {
       console.log('inside catch', error.message)
     })
 }
+
+export const getFavoriteMovies = () => {
+  return fetch('http://localhost:3001/api/v1/favorites')
+  .then(response => {
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw Error
+    }
+  })
+  .catch(error => {
+    console.log('inside catch', error.message)
+  })
+}
