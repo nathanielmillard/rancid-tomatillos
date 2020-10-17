@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import Comment from '../Comment/Comment'
 
 export default class CommentsContainer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       comments: [],
@@ -30,11 +30,15 @@ export default class CommentsContainer extends Component {
   render() {
     return (
       <>
+      {
+        (this.props.userID) ?
         <form>
           <label htmlFor='comment'>Comment:</label>
           <textarea rows='2' name='comment' value={this.state.comment} onChange={this.handleChange} />
           <button type='button'>Submit</button>
-        </form>
+        </form> :
+        <h2>Login to comment on this movie!</h2>
+      }
         {
           (this.state.comments.length > 1) ? '' 
           :
