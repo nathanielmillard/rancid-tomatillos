@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import PropTypes from 'prop-types'
+
 import MovieTile from '../MovieTile/MovieTile';
 
 import {getAllMovies} from '../../apiCalls.js'
@@ -44,3 +46,7 @@ class MovieMain extends Component {
 }
 
 export default MovieMain;
+
+MovieMain.propTypes = {
+  currentUser: PropTypes.object
+}
