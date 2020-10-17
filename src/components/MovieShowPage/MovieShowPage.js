@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import PropTypes from 'prop-types';
+
 import { getOneMovie, rateMovie, deleteMovieRating } from '../../apiCalls.js'
 
 import './MovieShowPage.scss'
@@ -57,7 +59,7 @@ class MovieShowPage extends Component {
     let movieBackdropAlt = 'No Backdrop Image Found'
 
     if (foundRating) {
-      userRatingSection = 
+      userRatingSection =
       <section>
         <h3 className='movie-user-rating'>Your Rating: {foundRating.rating}</h3>
         <button className='delete-user-rating' onClick={this.deleteRating}>Delete Rating</button>
@@ -98,3 +100,10 @@ class MovieShowPage extends Component {
 }
 
 export default MovieShowPage
+
+MovieShowPage.propTypes = {
+  movieID: PropTypes.string.isRequired,
+  userMovieRatings: PropTypes.array,
+  userID: PropTypes.string,
+  populateUserRatings: PropTypes.func.isRequired
+}
