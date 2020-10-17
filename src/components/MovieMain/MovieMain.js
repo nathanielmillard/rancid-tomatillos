@@ -28,8 +28,13 @@ class MovieMain extends Component {
       this.setState(response)
     })
   }
-  toggleFavorite = (specificMovie) => {
-    addFavoriteMovie(specificMovie)
+  toggleFavorite = (specificMovie, target) => {
+    if (target === 'Favorite this movie') {
+      addFavoriteMovie(specificMovie)
+    } else if (target === 'Unfavorite this movie') {
+      console.log('Made It Here')
+    }
+    this.props.populateUserFeedback();
   }
   render() {
     const moviesComponents = this.state.movies.map(movie => {
@@ -38,6 +43,7 @@ class MovieMain extends Component {
           key={movie.id}
           movie={movie}
           userMovieRatings={this.props.currentUser.ratings}
+          userFavorites={this.props.currentUser.favorites}
           toggleFavorite={this.toggleFavorite}
         />
       )
@@ -59,5 +65,6 @@ class MovieMain extends Component {
 export default MovieMain;
 
 MovieMain.propTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
+  populateUserFeedback: PropTypes.func
 }
