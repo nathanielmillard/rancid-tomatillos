@@ -8,8 +8,7 @@ export default class CommentsContainer extends Component {
 
     this.state = {
       comments: [],
-      title: '',
-      body: ''
+      comment: ''
     }
   }
 
@@ -18,17 +17,22 @@ export default class CommentsContainer extends Component {
   // submit comment
 
   // updateCommentsState
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
 
   // reset inputs
+  resetInputs = () => {
+    this.setState({ title: '', comment: ''});
+  }
 
   render() {
     return (
       <>
         <form>
-          <label htmlFor='title'>Title:</label>
-          <input type='text' name='title' />
-          <label htmlFor='body'>Body:</label>
-          <textarea rows='2' name='body' />
+          <label htmlFor='comment'>Comment:</label>
+          <textarea rows='2' name='comment' value={this.state.comment} onChange={this.handleChange} />
           <button type='button'>Submit</button>
         </form>
         {
