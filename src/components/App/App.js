@@ -6,7 +6,7 @@ import MovieMain from '../MovieMain/MovieMain';
 import MovieShowPage from '../MovieShowPage/MovieShowPage';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import {getUserRatings} from '../../apiCalls.js'
+import {getUserRatings, getUserFavorites} from '../../apiCalls.js'
 
 import './App.scss';
 
@@ -18,13 +18,14 @@ class App extends Component {
 			currentUser: '',
 			id: '',
 			ratings: [],
+			favorites: [],
 			error: ''
 		};
 	}
 
 	logInUser = user => {
 		this.setState({ currentUser: user.user.name, id: user.user.id });
-		this.populateUserRatings();
+		this.populateUserFeedback();
 		// this.setState(user.user) potential refactor later
 	};
 
@@ -33,8 +34,9 @@ class App extends Component {
 		window.location.pathname = '/'
 	};
 
-	populateUserRatings = () => {
+	populateUserFeedback = () => {
 		getUserRatings(this.state.id).then(response => this.setState(response))
+		getUserFavorites().then(response => this.setState({favorites: response}))
 	}
 
 	render() {
@@ -51,6 +53,7 @@ class App extends Component {
 								{this.state.error && <h3>{this.state.error}</h3>}
 								<MovieMain
 									currentUser={this.state}
+									populateUserFeedback={this.populateUserFeedback}
 								/>
 							</main>
 						)}
@@ -66,6 +69,7 @@ class App extends Component {
 								{this.state.error && <h3>{this.state.error}</h3>}
 								<MovieMain
 									currentUser={this.state}
+									populateUserFeedback={this.populateUserFeedback}
 								/>
 							</main>
 						)}
@@ -95,7 +99,7 @@ class App extends Component {
 									movieID={movieID}
 									userMovieRatings={this.state.ratings}
 									userID={this.state.id}
-									populateUserRatings={this.populateUserRatings}
+									populateUserFeedback={this.populateUserFeedback}
 								/>
 							</main>
 						)}
