@@ -56,6 +56,7 @@ class App extends Component {
 								<MovieMain
 									currentUser={this.state}
 									populateUserFeedback={this.populateUserFeedback}
+									view={'all'}
 								/>
 							</main>
 						)}
@@ -72,6 +73,7 @@ class App extends Component {
 								<MovieMain
 									currentUser={this.state}
 									populateUserFeedback={this.populateUserFeedback}
+									view={'favorites'}
 								/>
 							</main>
 						)}
