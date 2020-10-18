@@ -116,7 +116,6 @@ export const getAllMovieComments = (movieID) => {
       }
     })
     .then(data => {
-      console.log(data);
       if (data.comments.length < 1) {
         return { loading: 'There are no comments for this movie'};
       } else {
