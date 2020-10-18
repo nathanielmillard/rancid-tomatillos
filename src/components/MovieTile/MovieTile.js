@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-
 import PropTypes from 'prop-types';
 
 import './MovieTile.scss'
@@ -17,15 +16,24 @@ const MovieTile = (props) => {
     altCaption = 'Unfavorite this movie'
     imagesource = unfavoriteButton
   }
+
+  const movieTileButton = () => {
+    if (props.userID) {
+      return (
+        <button className='favorite-button' onClick={handleClick}>
+        <img src={imagesource} alt={altCaption}/>
+        </button>
+      )
+    }
+  }
+
   return (
     <article className='movie-tile'>
       <Link to={`/MovieShowPage/${props.movie.id}`}>
         <img src={props.movie.poster_path} alt={props.movie.title + " poster"}/>
       </Link>
       <div className='movie-tile-footer'>
-      <button className='favorite-button' onClick={handleClick}>
-        <img src={imagesource} alt={altCaption}/>
-      </button>
+      {movieTileButton()}
       <h4 className='movie-rating'>Rating: {props.movie.average_rating.toFixed(1)}</h4>
       </div>
       { (foundRating) ? <h4 className='movie-user-rating'>Your Rating: {foundRating.rating}</h4> : '' }
