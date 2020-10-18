@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import MovieTile from '../MovieTile/MovieTile';
 
-import {getAllMovies, addFavoriteMovie} from '../../apiCalls.js'
+import {getAllMovies, toggleFavoriteMovie} from '../../apiCalls.js'
 
 import './MovieMain.scss'
 
@@ -21,6 +21,7 @@ class MovieMain extends Component {
 
   componentDidMount = () => {
     this.getAllMovieData();
+    this.props.populateUserFeedback(this.props.currentUser.id)
   }
 
   getAllMovieData = () => {
@@ -29,12 +30,8 @@ class MovieMain extends Component {
     })
   }
   toggleFavorite = (specificMovie, target) => {
-    if (target === 'Favorite this movie') {
-      addFavoriteMovie(specificMovie)
-    } else if (target === 'Unfavorite this movie') {
-      console.log('Made It Here')
-    }
-    this.props.populateUserFeedback();
+    toggleFavoriteMovie(specificMovie)
+    this.props.populateUserFeedback(this.props.currentUser.id);
   }
   render() {
     const moviesComponents = this.state.movies.map(movie => {
@@ -45,6 +42,7 @@ class MovieMain extends Component {
           userMovieRatings={this.props.currentUser.ratings}
           userFavorites={this.props.currentUser.favorites}
           toggleFavorite={this.toggleFavorite}
+          userID={this.props.currentUser.id}
         />
       )
     })

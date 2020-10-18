@@ -31,7 +31,7 @@ class MovieShowPage extends Component {
       "movie_id": this.props.movieID,
       rating: +this.state.rating
     }
-    rateMovie(this.props.userID, data).then(() => this.props.populateUserRatings())
+    rateMovie(this.props.userID, data).then(() => this.props.populateUserFeedback(this.props.userID))
     this.setState({rating: '', wrongInput: '', error: ''});
   }
 
@@ -104,6 +104,6 @@ export default MovieShowPage
 MovieShowPage.propTypes = {
   movieID: PropTypes.string.isRequired,
   userMovieRatings: PropTypes.array,
-  userID: PropTypes.string,
+  userID: PropTypes.number,
   populateUserRatings: PropTypes.func.isRequired
 }

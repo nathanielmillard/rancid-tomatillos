@@ -23,9 +23,9 @@ class App extends Component {
 		};
 	}
 
-	logInUser = user => {
+	logInUser = (user) => {
 		this.setState({ currentUser: user.user.name, id: user.user.id });
-		this.populateUserFeedback();
+		this.populateUserFeedback(this.state.currentUser.id);
 		// this.setState(user.user) potential refactor later
 	};
 
@@ -34,8 +34,10 @@ class App extends Component {
 		window.location.pathname = '/'
 	};
 
-	populateUserFeedback = () => {
-		getUserRatings(this.state.id).then(response => this.setState(response))
+	populateUserFeedback = (id) => {
+		if (id) {
+			getUserRatings(id).then(response => this.setState(response))
+		}
 		getUserFavorites().then(response => this.setState({favorites: response}))
 	}
 
