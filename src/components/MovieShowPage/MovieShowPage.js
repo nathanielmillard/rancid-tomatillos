@@ -94,9 +94,7 @@ class MovieShowPage extends Component {
             <p>{this.state.movie.overview}</p>
           </div>
         </div>
-        <section className='comments-container'>
-          <CommentsContainer />
-        </section>
+        <CommentsContainer movieID={this.props.movieID} userID={this.props.userID} />
       </section>
     )
   }
