@@ -1,46 +1,48 @@
 @import '../../variables';
 
 .movie-show-page {
-  display: flex;
-  background-color: $nuetraldarkest;
-  .background {
-    height: auto;
-    width: 80vw;
-    opacity: 60%;
-    position: fixed;
-    z-index: 1;
-  }
-  .movie-section{
-    margin-left: 2vw;
-    height: 60vh;
-    position: relative;
-    z-index: 2;
-    align-self: center;
-    display: flex;
-    flex-direction: row;
-    .main-poster {
-      height: inherit;
-      filter: drop-shadow(7px 5px 4px $colorDeep);
-    }
-    .movie-info{
-      filter: drop-shadow(7px 5px 4px $colorDeep);
-      font-family: $body;
-      font-weight: normal;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      margin-left: 5vw;
-      justify-content: center;
-    }
-    button {
-      border: none;
-      border-radius: none;
-      background-color: $nuetraldarkest;
-      color: $nuetralLightest;
-      padding: .25vh;
-    }
-    button:hover {
-      color: $brightAccent;
-    }
-  }
+	display: flex;
+	flex-direction: column;
+	background-color: $nuetraldarkest;
+	.background {
+		height: auto;
+		width: 80vw;
+		opacity: 60%;
+		position: fixed;
+		z-index: 1;
+	}
+	.movie-section {
+		margin-left: 2vw;
+		margin-top: 20vh;
+		height: 60vh;
+		position: relative;
+		z-index: 2;
+		align-self: center;
+		display: flex;
+		flex-direction: row;
+		.main-poster {
+			height: inherit;
+			filter: drop-shadow(7px 5px 4px $colorDeep);
+		}
+		.movie-info {
+			filter: drop-shadow(7px 5px 4px $colorDeep);
+			font-family: $body;
+			font-weight: normal;
+			color: white;
+			display: flex;
+			flex-direction: column;
+			margin-left: 5vw;
+			justify-content: center;
+		}
+		button {
+			border: none;
+			border-radius: none;
+			background-color: $nuetraldarkest;
+			color: $nuetralLightest;
+			padding: 0.25vh;
+		}
+		button:hover {
+			color: $brightAccent;
+		}
+	}
 }
