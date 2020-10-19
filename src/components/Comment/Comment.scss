@@ -1,0 +1,18 @@
+@import '../../variables';
+
+.comment {
+	padding: 1rem;
+	margin: 0.6rem;
+	background-color: white;
+	border-radius: 0.5rem;
+
+	.comment-header {
+		display: flex;
+		align-items: flex-end;
+		margin-bottom: 0.9rem;
+
+		.comment-date {
+			margin-left: 0.9rem;
+		}
+	}
+}
