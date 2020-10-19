@@ -6,7 +6,16 @@
 	position: relative;
 	z-index: 10;
 
-	.comment-form {
+	.comment-login {
+		filter: drop-shadow(7px 5px 4px $colorDeep);
+		font-family: $body;
+		font-weight: normal;
+		font-size: 1.5rem;
+		color: white;
+	}
+
+	.comment-form,
+	.comment-status {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -15,27 +24,27 @@
 		margin: 0 auto;
 
 		label {
-      filter: drop-shadow(7px 5px 4px $colorDeep);
-      font-family: $body;
-      font-weight: normal;
-      font-size: 1.5rem;
-      margin-bottom: 0.6rem;
-      color: white;
+			filter: drop-shadow(7px 5px 4px $colorDeep);
+			font-family: $body;
+			font-weight: normal;
+			font-size: 1.5rem;
+			margin-bottom: 0.6rem;
+			color: white;
 		}
 
 		textarea {
 			height: 10rem;
 			padding: 0.6rem;
-      line-height: 1.4rem;
-      font-family: $header;
-      resize: none;
+			line-height: 1.4rem;
+			font-family: $header;
+			resize: none;
 		}
 
 		button {
 			margin-top: 0.6rem;
-      height: 2rem;
-      font-family: $header;
-      font-size: .9rem;
+			height: 2rem;
+			font-family: $header;
+			font-size: 0.9rem;
 		}
 	}
 }
