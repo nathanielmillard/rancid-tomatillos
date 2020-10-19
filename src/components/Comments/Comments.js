@@ -53,7 +53,7 @@ export default class CommentsContainer extends Component {
 	render() {
 		return (
 			<section className='comments-container'>
-				{!this.props.userID ? (
+				{this.props.userID ? (
 					<form className='comment-form'>
 						<label htmlFor='comment'>Submit A New Comment</label>
 						<textarea
@@ -67,7 +67,7 @@ export default class CommentsContainer extends Component {
 						</button>
 					</form>
 				) : (
-					<h2>Login to comment on this movie!</h2>
+					<h2 className='comment-login'>Login to comment on this movie!</h2>
 				)}
 				{this.state.comments.length < 1 ? (
 					''
@@ -79,7 +79,9 @@ export default class CommentsContainer extends Component {
 					</section>
 				)}
 				{(this.state.error || this.state.loading) && (
-					<h2>{this.state.error || this.state.loading}</h2>
+					<h2 className='comment-status'>
+						{this.state.error || this.state.loading}
+					</h2>
 				)}
 			</section>
 		);
