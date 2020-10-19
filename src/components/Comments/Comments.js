@@ -3,11 +3,11 @@ import propTypes from 'prop-types';
 
 import Comment from '../Comment/Comment';
 
-import { getAllMovieComments } from '../../apiCalls';
+import { getAllMovieComments, postMovieComment } from '../../apiCalls';
 
 import './Comments.scss';
 
-export default class CommentsContainer extends Component {
+export default class Comments extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -29,6 +29,12 @@ export default class CommentsContainer extends Component {
 	};
 
 	submitComment = () => {
+		if (!this.state.comment.trim()) {
+			this.setState({
+				error: 'You must have a comment before submitting a comment',
+			});
+			return;
+		}
 		const commentData = {
 			id: Date.now(),
 			movieId: +this.props.movieID,
@@ -36,9 +42,10 @@ export default class CommentsContainer extends Component {
 			comment: this.state.comment,
 			created_at: Date.now(),
 		};
-		this.setState({ comments: [...this.state.comments, commentData] });
+		postMovieComment(commentData.movieId, commentData).then(response => 
+			this.setState({ comments: [...this.state.comments, response.newComment ],  loading: '', error: ''}));
 		this.resetInputs();
-		// this.retrieveAllComments();
+		this.retrieveAllComments();
 	};
 
 	handleChange = event => {
@@ -88,7 +95,7 @@ export default class CommentsContainer extends Component {
 	}
 }
 
-CommentsContainer.propTypes = {
+Comments.propTypes = {
 	movieID: propTypes.string.isRequired,
 	userID: propTypes.string,
 };
