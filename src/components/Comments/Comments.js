@@ -45,7 +45,6 @@ export default class Comments extends Component {
 		postMovieComment(commentData.movieId, commentData).then(response => 
 			this.setState({ comments: [...this.state.comments, response.newComment ],  loading: '', error: ''}));
 		this.resetInputs();
-		this.retrieveAllComments();
 	};
 
 	handleChange = event => {
