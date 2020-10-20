@@ -1,5 +1,4 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types';
 
 
@@ -8,16 +7,16 @@ import unfavoriteButton from '../../images/unfavorite-button.svg'
 import { toggleFavoriteMovie, getUserFavorites } from '../../apiCalls.js'
 
 const FavoriteButton = (props) => {
-
-  const chooseButtonStatus () => {
-    let favorited
-    getUserFavorites.then(favorited = response.find(favorite => favorite == props.movieID))
-
-  }
   let imagesource = favoriteButton
   let altCaption = 'Favorite this movie'
-  const handleClick = (e) => { props.toggleFavorite(props.movie, e.target.alt) }
-
+  if(!props.isAFavorite) {
+    imagesource = unfavoriteButton
+    altCaption = 'Unfavorite this movie'
+  }
+  const handleClick = async () => {
+    const response = await toggleFavoriteMovie(props.movieID)
+    props.populateUserFeedback(props.userID)
+  }
   return (
     <button className='favorite-button' onClick={handleClick}>
     <img src={imagesource} alt={altCaption}/>
@@ -37,7 +36,9 @@ const FavoriteButton = (props) => {
 export default FavoriteButton;
 
 FavoriteButton.propTypes = {
+  userID: PropTypes.number,
   movieID: PropTypes.number,
-  userFavorites: PropTypes.array,
-  loadUserFeedback: PropTypes.func
+  isAFavorite: PropTypes.bool,
+  // userFavorites: PropTypes.array,
+  populateUserFeedback: PropTypes.func,
 }
