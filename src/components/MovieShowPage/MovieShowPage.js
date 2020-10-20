@@ -78,13 +78,11 @@ class MovieShowPage extends Component {
 		}
 	}
 
-	render() {
+	renderRatingSection = () => {
 		const foundRating = this.props.userMovieRatings.find(
 			rating => rating.movie_id === this.state.movie.id
 		);
 		let userRatingSection = '';
-		let movieBackdrop = '';
-		let movieBackdropAlt = 'No Backdrop Image Found';
 
 		if (foundRating) {
 			userRatingSection = (
@@ -112,6 +110,12 @@ class MovieShowPage extends Component {
 				</label>
 			);
 		}
+		return userRatingSection
+	}
+
+	render() {
+		let movieBackdrop = '';
+		let movieBackdropAlt = 'No Backdrop Image Found';
 
 		if (
 			this.state.movie.backdrop_path &&
@@ -145,7 +149,7 @@ class MovieShowPage extends Component {
 							<h3>{this.state.wrongInput || this.state.error}</h3>
 						) : ('')}
 						{this.props.userID ? (
-							userRatingSection
+							this.renderRatingSection()
 						) : (
 							<h3>Sign in to leave your own rating</h3>
 						)}
