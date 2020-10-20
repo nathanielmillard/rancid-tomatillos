@@ -13,10 +13,8 @@ import './App.scss';
 class App extends Component {
 	constructor() {
 		super();
-
 		this.state = {
-			currentUser: '',
-			id: '',
+			currentUser: {},
 			ratings: [],
 			favorites: [],
 			error: ''
@@ -24,13 +22,12 @@ class App extends Component {
 	}
 
 	logInUser = (user) => {
-		this.setState({ currentUser: user.user.name, id: user.user.id });
+		this.setState({ currentUser: user.user });
 		this.populateUserFeedback(this.state.currentUser.id);
-		// this.setState(user.user) potential refactor later
 	};
 
 	logOutUser = () => {
-		this.setState({ currentUser: '', id: '' });
+		this.setState({ currentUser: ''});
 		window.location.pathname = '/'
 	};
 
@@ -54,7 +51,7 @@ class App extends Component {
 								/>
 								{this.state.error && <h3>{this.state.error}</h3>}
 								<MovieMain
-									currentUser={this.state}
+									currentUserInfo={this.state}
 									populateUserFeedback={this.populateUserFeedback}
 									view={'all'}
 								/>
@@ -71,7 +68,7 @@ class App extends Component {
 								/>
 								{this.state.error && <h3>{this.state.error}</h3>}
 								<MovieMain
-									currentUser={this.state}
+									currentUserInfo={this.state}
 									populateUserFeedback={this.populateUserFeedback}
 									view={'favorites'}
 								/>
@@ -82,7 +79,7 @@ class App extends Component {
 						exact
 						path='/sign-in'
 						render={() => {
-							if (!this.state.currentUser) {
+							if (!this.state.currentUser.name) {
 								return <SignIn logIn={this.logInUser} />;
 							} else {
 								return <Redirect to='/' />;
@@ -91,7 +88,7 @@ class App extends Component {
 					/>
 					<Route exact path='/MovieShowPage/:movieID'
 					render={({match}) => {
-						const movieID = match.params.movieID
+						const movieID = parseInt(match.params.movieID)
 						return (
 							<main>
 								<Navbar
@@ -103,7 +100,7 @@ class App extends Component {
 									userFavorites={this.state.favorites}
 									movieID={movieID}
 									userMovieRatings={this.state.ratings}
-									userID={this.state.id}
+									userID={this.state.currentUser.id}
 									populateUserFeedback={this.populateUserFeedback}
 								/>
 							</main>
