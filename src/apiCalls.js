@@ -191,7 +191,6 @@ export const toggleFavoriteMovie = (movieID) => {
   })
     .then(response => {
       if (response.ok) {
-        console.log(response)
         return response.json()
       } else {
         throw Error

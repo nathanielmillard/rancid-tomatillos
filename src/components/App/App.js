@@ -100,6 +100,7 @@ class App extends Component {
 									favoriteView={false}
 								/>
 								<MovieShowPage
+									userFavorites={this.state.favorites}
 									movieID={movieID}
 									userMovieRatings={this.state.ratings}
 									userID={this.state.id}

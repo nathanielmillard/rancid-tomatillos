@@ -50,7 +50,7 @@ export default MovieTile;
 MovieTile.propTypes = {
   userID: PropTypes.number,
   userMovieRatings: PropTypes.array,
-  userUserFavorites: PropTypes.array,
+  userFavorites: PropTypes.array,
   movie: PropTypes.object.isRequired,
   toggleFavorite: PropTypes.func
 }

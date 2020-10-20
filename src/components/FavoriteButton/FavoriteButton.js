@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
-
+import './FavoriteButton.scss'
 import favoriteButton from '../../images/favorite-button.svg'
 import unfavoriteButton from '../../images/unfavorite-button.svg'
 import { toggleFavoriteMovie, getUserFavorites } from '../../apiCalls.js'
@@ -9,7 +9,7 @@ import { toggleFavoriteMovie, getUserFavorites } from '../../apiCalls.js'
 const FavoriteButton = (props) => {
   let imagesource = favoriteButton
   let altCaption = 'Favorite this movie'
-  if(!props.isAFavorite) {
+  if(props.isAFavorite) {
     imagesource = unfavoriteButton
     altCaption = 'Unfavorite this movie'
   }

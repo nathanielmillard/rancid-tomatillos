@@ -40,12 +40,13 @@ class MovieMain extends Component {
       return this.state.movies.map(movie => {
         return (
           <MovieTile
-            key={movie.id}
-            movie={movie}
-            userMovieRatings={this.props.currentUser.ratings}
-            userFavorites={this.props.currentUser.favorites}
-            populateUserFeedback={this.props.populateUserFeedback}
-            userID={this.props.currentUser.id}
+          key={movie.id}
+          userID={this.props.currentUser.id}
+          movie={movie}
+          userMovieRatings={this.props.currentUser.ratings}
+          userFavorites={this.props.currentUser.favorites}
+          userID={this.props.currentUser.id}
+          populateUserFeedback={this.props.populateUserFeedback}
           />
         )
       })
