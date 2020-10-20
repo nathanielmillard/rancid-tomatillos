@@ -7,21 +7,22 @@ import PropTypes from 'prop-types';
 import './Navbar.scss'
 
 const NavBar = (props) => {
-	const signInButton = <Link className='hidden-link' to='/sign-in'><button>SignIn</button>
-	</Link>
+	const signInButton = <Link className='hidden-link' to='/sign-in'>
+			<button>SignIn</button>
+		</Link>
 	const signOutButton =  <button onClick={props.signOut}> SignOut </button>
 	const viewFavoritesButton = <Link className='hidden-link' to='/favorites'>
-								<button> View Favorites </button>
-							</Link>
+			<button> View Favorites </button>
+		</Link>
 	const viewAllButton = <Link className='hidden-link' to='/'>
-								<button> View All </button>
-							</Link>
+			<button> View All </button>
+		</Link>
 	return (
 		<section className='navbar-component'>
 			<Link to='/'><h1 className='navbar-title'>Rancid Tomatillos</h1></Link>
-			{(!props.currentUser) ? signInButton :	signOutButton }
+			{(!props.currentUser.name) ? signInButton :	signOutButton }
       {
-        (!props.currentUser) ? '' : <h3 className='navbar-current-user'>{'Welcome back ' + props.currentUser}</h3>
+        (!props.currentUser.name) ? '' : <h3 className='navbar-current-user'>{'Welcome back ' + props.currentUser.name}</h3>
       }
 			{(props.favoriteView) ? viewAllButton : viewFavoritesButton}
 		</section>
@@ -31,7 +32,7 @@ const NavBar = (props) => {
 export default NavBar;
 
 NavBar.propTypes = {
-	currentUser: PropTypes.string,
+	currentUser: PropTypes.object,
 	signOut: PropTypes.func.isRequired,
 	favoriteView: PropTypes.bool,
 	toggleView: PropTypes.func
