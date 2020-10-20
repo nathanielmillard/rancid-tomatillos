@@ -57,6 +57,21 @@ describe('Comments', () => {
       </MemoryRouter>
     )
     const message = await waitFor(() => getByText('This movie is magical!'));
+    const author = await waitFor(() => getByText('Author: Lucy'));
     expect(message).toBeInTheDocument();
+    expect(author).toBeInTheDocument();
+  });
+
+  it('Should show a form when a user is logged in to leave a comment on a movie', async () => {
+    getAllMovieComments.mockResolvedValueOnce(mockMovieComments);
+    const { getByPlaceholderText, getByRole } = render(
+      <MemoryRouter>
+        <Comments movieID={446893} userID={'78'} />
+      </MemoryRouter>
+    )
+    const message = await waitFor(() => getByPlaceholderText('Type your comment here'));
+    const submitBtn = getByRole('button', { name: 'Submit' });
+    expect(message).toBeInTheDocument();
+    expect(submitBtn).toBeInTheDocument();
   });
 })

@@ -68,6 +68,7 @@ export default class Comments extends Component {
 							name='comment'
 							value={this.state.comment}
 							onChange={this.handleChange}
+							placeholder='Type your comment here'
 						/>
 						<button type='button' onClick={() => this.submitComment()}>
 							Submit
