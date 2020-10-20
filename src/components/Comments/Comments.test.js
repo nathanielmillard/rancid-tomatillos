@@ -14,4 +14,15 @@ const mockNoComments = {
   loading: 'There are no comments for this movie'
 };
 
-
+describe('Comments', () => {
+  it('Should show that a user has to be logged in to comment on a movie', async () => {
+    getAllMovieComments.mockResolvedValueOnce(mockNoComments);
+    const { getByText } = render(
+      <MemoryRouter>
+        <Comments movieID={446893} userID={''} />
+      </MemoryRouter>
+    )
+    const message = await waitFor(() => getByText('Login to comment on this movie!'));
+    expect(message).toBeInTheDocument();
+  });
+})
