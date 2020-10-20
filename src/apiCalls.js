@@ -163,7 +163,6 @@ export const postMovieComment = (movieID, comment) => {
   })
   .then(response => {
     if (response.ok) {
-      console.log('comment ok!');
       return response.json();
     } else {
       throw Error;

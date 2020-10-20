@@ -45,7 +45,6 @@ export default class Comments extends Component {
 		postMovieComment(commentData.movieId, commentData).then(response =>
 			this.setState({ comments: [...this.state.comments, response.newComment ],  loading: '', error: ''}));
 		this.resetInputs();
-		this.retrieveAllComments();
 	};
 
 	handleChange = event => {
@@ -68,6 +67,7 @@ export default class Comments extends Component {
 							name='comment'
 							value={this.state.comment}
 							onChange={this.handleChange}
+							placeholder='Type your comment here'
 						/>
 						<button type='button' onClick={() => this.submitComment()}>
 							Submit
