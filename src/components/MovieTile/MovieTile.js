@@ -2,6 +2,8 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types';
 
+import FavoriteButton from '../FavoriteButton/FavoriteButton';
+
 import './MovieTile.scss'
 import favoriteButton from '../../images/favorite-button.svg'
 import unfavoriteButton from '../../images/unfavorite-button.svg'
@@ -12,18 +14,20 @@ const MovieTile = (props) => {
   const handleClick = (e) => { props.toggleFavorite(props.movie, e.target.alt) }
   const foundRating = props.userMovieRatings.find(rating => rating.movie_id === props.movie.id)
   const foundFavorite = props.userFavorites.find(favorite => favorite === props.movie.id)
+  let isAFavorite = false
   if(foundFavorite) {
-    altCaption = 'Unfavorite this movie'
-    imagesource = unfavoriteButton
+    isAFavorite = true
   }
-
-  const movieTileButton = () => {
-    if (props.userID) {
-      return (
-        <button className='favorite-button' onClick={handleClick}>
-        <img src={imagesource} alt={altCaption}/>
-        </button>
-      )
+  const renderFavoriteButton = (id) => {
+    if(id) {
+      return (<FavoriteButton
+        userID={props.userID}
+        movieID={props.movie.id}
+        isAFavorite={isAFavorite}
+        populateUserFeedback={props.populateUserFeedback}
+      />)
+    } else {
+      return
     }
   }
 
@@ -33,7 +37,7 @@ const MovieTile = (props) => {
         <img src={props.movie.poster_path} alt={props.movie.title + " poster"}/>
       </Link>
       <div className='movie-tile-footer'>
-      {movieTileButton()}
+      {renderFavoriteButton(props.userID)}
       <h4 className='movie-rating'>Rating: {props.movie.average_rating.toFixed(1)}</h4>
       </div>
       { (foundRating) ? <h4 className='movie-user-rating'>Your Rating: {foundRating.rating}</h4> : '' }
@@ -44,6 +48,7 @@ const MovieTile = (props) => {
 export default MovieTile;
 
 MovieTile.propTypes = {
+  userID: PropTypes.number,
   userMovieRatings: PropTypes.array,
   userUserFavorites: PropTypes.array,
   movie: PropTypes.object.isRequired,
