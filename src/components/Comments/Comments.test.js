@@ -36,6 +36,10 @@ const submitMovieComment = {
 	},
 };
 
+const mockRejectedFetch = {
+  error: 'Something went wrong on our end'
+}
+
 describe('Comments', () => {
 	it('Should show that a user has to be logged in to comment on a movie', async () => {
 		getAllMovieComments.mockResolvedValueOnce(mockNoComments);
@@ -120,5 +124,18 @@ describe('Comments', () => {
 		userEvent.click(getByRole('button', { name: 'Submit' }));
 		const comment = await waitFor(() => getByText('Mock comment'));
 		expect(comment).toBeInTheDocument();
+	});
+
+	it('Should show a user an error message if something is wrong with server', async () => {
+    getAllMovieComments.mockResolvedValueOnce(mockRejectedFetch);
+		const { getByText } = render(
+			<MemoryRouter>
+				<Comments movieID={446893} userID={'78'} />
+			</MemoryRouter>
+		);
+		const message = await waitFor(() =>
+			getByText('Something went wrong on our end')
+    );
+    expect(message).toBeInTheDocument();
 	});
 });
