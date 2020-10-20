@@ -74,4 +74,16 @@ describe('Comments', () => {
     expect(message).toBeInTheDocument();
     expect(submitBtn).toBeInTheDocument();
   });
+
+  it('A user should not be able to submit a blank comment', async () => {
+    getAllMovieComments.mockResolvedValueOnce(mockMovieComments);
+    const { getByText, getByRole } = render(
+      <MemoryRouter>
+        <Comments movieID={446893} userID={'78'} />
+      </MemoryRouter>
+    )
+    userEvent.click(getByRole('button', { name: 'Submit' }));
+    const message = getByText('You must have a comment before submitting a comment');
+    expect(message).toBeInTheDocument();
+  });
 })
