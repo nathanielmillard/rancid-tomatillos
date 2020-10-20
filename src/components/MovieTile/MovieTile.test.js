@@ -16,9 +16,12 @@ describe('MovieTile', () => {
       title: "Force of Nature",
     }
     render(<MemoryRouter><MovieTile
+			userID={78}
+			populateUserFeedback={jest.fn()}
       movie={trialMovie}
 			key={3}
-			userMovieRating={[]}
+			userMovieRatings={[]}
+			userFavorites={[]}
     /></MemoryRouter>)
     expect(screen.getByText('Rating: 1.0')).toBeInTheDocument();
     expect(screen.getByAltText(`${trialMovie.title} poster`)).toBeInTheDocument();

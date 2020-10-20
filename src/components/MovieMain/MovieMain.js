@@ -93,6 +93,7 @@ class MovieMain extends Component {
 export default MovieMain;
 
 MovieMain.propTypes = {
+  view: PropTypes.string,
   currentUserInfo: PropTypes.object.isRequired,
   populateUserFeedback: PropTypes.func.isRequired
 }

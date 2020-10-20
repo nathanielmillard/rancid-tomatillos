@@ -29,7 +29,6 @@ describe('Sign-In', () => {
     userEvent.type(screen.getByPlaceholderText('email'), userData.email);
     userEvent.type(screen.getByPlaceholderText('password'), userData.password);
     userEvent.click(screen.getByText('Submit'));
-    screen.debug();
     // expect(mockSignIn).toHaveBeenCalled();
   });
 

@@ -19,17 +19,22 @@ const trialMovie = {loading: '', movies: [ {
   } ] }
 
 const trialUser = {
-  currentUser: 'Lucy',
+  currentUser: {name: 'Lucy'},
   error: '',
   id: 78,
   ratings: [],
+  favorites: []
 }
 
 describe('MovieMain tests', ()=> {
   it('Should display movies after fetch call', async ()=>{
     getAllMovies.mockResolvedValue(trialMovie)
     render(<MemoryRouter>
-        <MovieMain currentUser={trialUser}/>
+        <MovieMain
+        view={'all'}
+        currentUserInfo={trialUser}
+        populateUserFeedback={jest.fn()}
+        />
       </MemoryRouter>);
    const message = await waitFor(()=> screen.getByText('Rating: 8.0'))
    expect(message).toBeInTheDocument()
@@ -38,7 +43,10 @@ describe('MovieMain tests', ()=> {
   it('Should display error after fetch call fails', async ()=>{
     getAllMovies.mockResolvedValue({ loading: '', movies: [], error: 'We encountered an error, please reload page' })
     render(<MemoryRouter>
-        <MovieMain currentUser={trialUser}/>
+        <MovieMain
+        currentUserInfo={trialUser}
+        populateUserFeedback={jest.fn()}
+        />
       </MemoryRouter>);
    const message = await waitFor(()=> screen.getByText('We encountered an error, please reload page'))
    expect(message).toBeInTheDocument()
