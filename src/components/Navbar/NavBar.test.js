@@ -12,21 +12,21 @@ describe("NavBar", () => {
 
   it('Should display on the App', () => {
     const mockFunction = jest.fn();
-    render(<MemoryRouter><NavBar currentUser={"Lucy"} signOut={mockFunction} /></MemoryRouter>);
-    expect(screen.getByText('Lucy')).toBeInTheDocument();
+    render(<MemoryRouter><NavBar currentUser={ {name:"Lucy"} } signOut={mockFunction} /></MemoryRouter>);
+    expect(screen.getByText('Welcome back Lucy')).toBeInTheDocument();
     expect(screen.getByText('Rancid Tomatillos')).toBeInTheDocument();
   });
 
   it("Should display a user name if a user is logged in", () => {
     const mockFunction = jest.fn();
-    render(<MemoryRouter><NavBar currentUser={"Lucy"} signOut={mockFunction} /></MemoryRouter>);
-    expect(screen.getByText('Lucy')).toBeInTheDocument();
+    render(<MemoryRouter><NavBar currentUser={ {name:"Lucy"} } signOut={mockFunction} /></MemoryRouter>);
+    expect(screen.getByText('Welcome back Lucy')).toBeInTheDocument();
     expect(screen.getByText('Rancid Tomatillos')).toBeInTheDocument();
   });
 
   it("Should not display a user name if no user is logged in", () => {
     const mockFunction = jest.fn();
-    render(<MemoryRouter><NavBar currentUser={""} signOut={mockFunction} /></MemoryRouter>);
+    render(<MemoryRouter><NavBar currentUser={{}} signOut={mockFunction} /></MemoryRouter>);
     expect(screen.getByText('Rancid Tomatillos')).toBeInTheDocument();
   });
 })
