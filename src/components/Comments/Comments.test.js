@@ -25,4 +25,15 @@ describe('Comments', () => {
     const message = await waitFor(() => getByText('Login to comment on this movie!'));
     expect(message).toBeInTheDocument();
   });
+
+  it('Should show a user when a movie has no comments', async () => {
+    getAllMovieComments.mockResolvedValueOnce(mockNoComments);
+    const { getByText } = render(
+      <MemoryRouter>
+        <Comments movieID={446893} userID={''} />
+      </MemoryRouter>
+    )
+    const message = await waitFor(() => getByText('There are no comments for this movie'));
+    expect(message).toBeInTheDocument();
+  });
 })
