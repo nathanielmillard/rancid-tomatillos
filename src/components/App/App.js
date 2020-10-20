@@ -27,8 +27,7 @@ class App extends Component {
 	};
 
 	logOutUser = () => {
-		this.setState({ currentUser: ''});
-		window.location.pathname = '/'
+		this.setState({ currentUser: {}});
 	};
 
 	populateUserFeedback = (id) => {

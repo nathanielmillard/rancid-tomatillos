@@ -10,7 +10,9 @@ const NavBar = (props) => {
 	const signInButton = <Link className='hidden-link' to='/sign-in'>
 			<button>SignIn</button>
 		</Link>
-	const signOutButton =  <button onClick={props.signOut}> SignOut </button>
+	const signOutButton = <Link className='hidden-link' to='/'>
+			<button onClick={props.signOut}>SignOut</button>
+		</Link> 
 	const viewFavoritesButton = <Link className='hidden-link' to='/favorites'>
 			<button> View Favorites </button>
 		</Link>
