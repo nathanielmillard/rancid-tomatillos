@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Comments from '../Comments/Comments';
+import FavoriteButton from '../FavoriteButton/FavoriteButton'
 import PropTypes from 'prop-types';
 
 import { getOneMovie, rateMovie, deleteMovieRating } from '../../apiCalls.js';
@@ -104,6 +105,27 @@ class MovieShowPage extends Component {
 			movieBackdropAlt = this.state.movie.title + ' backdrop';
 		}
 
+		const foundFavorite = this.props.userFavorites.find(favorite => favorite == this.props.movieID)
+	  let isAFavorite = false
+		console.log(foundFavorite)
+	  if(foundFavorite) {
+	    isAFavorite = true
+	  }
+
+		const renderFavoriteButton = (id) => {
+	    if(id) {
+				console.log(isAFavorite + 'Is a favorite in render button')
+	      return (<FavoriteButton
+	        userID={this.props.userID}
+	        movieID={this.props.movieID}
+	        isAFavorite={isAFavorite}
+	        populateUserFeedback={this.props.populateUserFeedback}
+	      />)
+	    } else {
+	      return
+	    }
+	  }
+
 		return (
 			<section className='movie-show-page'>
 				<img
@@ -117,6 +139,7 @@ class MovieShowPage extends Component {
 						src={this.state.movie.poster_path}
 						alt={this.state.movie.title + 'poster'}
 					/>
+					{renderFavoriteButton(this.props.userID)}
 					<div className='movie-info'>
 						<h1>{this.state.movie.title}</h1>
 						<h2>Release Date: {this.state.movie.release_date} </h2>
@@ -145,8 +168,9 @@ class MovieShowPage extends Component {
 export default MovieShowPage;
 
 MovieShowPage.propTypes = {
-	movieID: PropTypes.string.isRequired,
-	userMovieRatings: PropTypes.array,
-	userID: PropTypes.string,
-	populateUserRatings: PropTypes.func.isRequired,
-};
+	userFavorites: PropTypes.array,
+  movieID: PropTypes.string.isRequired,
+  userMovieRatings: PropTypes.array,
+  userID: PropTypes.number,
+  populateUserRatings: PropTypes.func.isRequired
+}

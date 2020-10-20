@@ -21,6 +21,8 @@
 		display: flex;
 		flex-direction: row;
 		.main-poster {
+			position: inherit;
+			z-index: 1;
 			height: inherit;
 			filter: drop-shadow(7px 5px 4px $colorDeep);
 		}
@@ -33,6 +35,20 @@
 			flex-direction: column;
 			margin-left: 5vw;
 			justify-content: center;
+		}
+		.favorite-button{
+			position: absolute;
+			z-index: 9;
+			background: none;
+			height: 5vw;
+			width: 5vw;
+			img {
+				height: 100%;
+				width: 100%;
+			}
+			img:hover {
+				filter: drop-shadow(7px 5px 4px $brightAccent);
+			}
 		}
 		button {
 			border: none;

@@ -159,7 +159,7 @@ export const postMovieComment = (movieID, comment) => {
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify(comment),    
+		body: JSON.stringify(comment),
   })
   .then(response => {
     if (response.ok) {
@@ -174,4 +174,42 @@ export const postMovieComment = (movieID, comment) => {
       error: 'Something went wrong on our end',
     };
   });
+}
+
+export const toggleFavoriteMovie = (movieID) => {
+  return fetch('http://localhost:3001/api/v1/favorites', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(
+      {
+        id: movieID
+      }
+    )
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw Error
+      }
+    })
+    .catch(error => {
+      console.log('inside catch', error.message)
+    })
+}
+
+export const getUserFavorites = () => {
+  return fetch('http://localhost:3001/api/v1/favorites')
+  .then(response => {
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw Error
+    }
+  })
+  .catch(error => {
+    console.log('inside catch', error.message)
+  })
 }
