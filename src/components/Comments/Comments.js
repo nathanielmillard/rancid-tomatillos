@@ -42,7 +42,7 @@ export default class Comments extends Component {
 			comment: this.state.comment,
 			created_at: Date.now(),
 		};
-		postMovieComment(commentData.movieId, commentData).then(response => 
+		postMovieComment(commentData.movieId, commentData).then(response =>
 			this.setState({ comments: [...this.state.comments, response.newComment ],  loading: '', error: ''}));
 		this.resetInputs();
 		this.retrieveAllComments();
@@ -96,6 +96,6 @@ export default class Comments extends Component {
 }
 
 Comments.propTypes = {
-	movieID: propTypes.string.isRequired,
-	userID: propTypes.string,
+	movieID: propTypes.number.isRequired,
+	userID: propTypes.number,
 };
