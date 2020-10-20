@@ -10,7 +10,6 @@ import './MovieShowPage.scss';
 class MovieShowPage extends Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			rating: '',
 			wrongInput: '',
@@ -25,7 +24,7 @@ class MovieShowPage extends Component {
 
 	submitRating = () => {
 		if (
-			!Number.isInteger(+this.state.rating) ||
+			!Number.isInteger(this.state.rating) ||
 			this.state.rating < 1 ||
 			this.state.rating > 10
 		) {
@@ -36,31 +35,48 @@ class MovieShowPage extends Component {
 		}
 		const data = {
 			movie_id: this.props.movieID,
-			rating: +this.state.rating,
-		};
+			rating: this.state.rating,
+		}
 		rateMovie(this.props.userID, data).then(() =>
-			this.props.populateUserRatings()
-		);
+			this.props.populateUserFeedback(this.props.userID)
+		)
 		this.setState({ rating: '', wrongInput: '', error: '' });
 	};
 
 	updateRatingInput = event => {
 		const { name, value } = event.target;
-		this.setState({ [name]: value });
+		this.setState({ [name]: parseInt(value) });
 	};
 
 	deleteRating = () => {
 		const foundRating = this.props.userMovieRatings.find(
 			movie => movie.movie_id === this.state.movie.id
-		);
+		)
 		if (foundRating) {
 			deleteMovieRating(this.props.userID, foundRating.id).then(() => {
-				this.props.populateUserRatings();
+				this.props.populateUserFeedback(this.props.userID);
 			});
 		} else {
 			this.setState({ error: 'We were not able to delete your rating.' });
 		}
 	};
+
+	renderFavoriteButton = (id) => {
+		const foundFavorite = this.props.userFavorites.find(favorite => favorite === this.props.movieID)
+	  let isAFavorite = false
+	  if(foundFavorite) {
+	    isAFavorite = true
+	  }
+
+		if(id) {
+			return (<FavoriteButton
+				userID={this.props.userID}
+				movieID={this.props.movieID}
+				isAFavorite={isAFavorite}
+				populateUserFeedback={this.props.populateUserFeedback}
+			/>)
+		}
+	}
 
 	render() {
 		const foundRating = this.props.userMovieRatings.find(
@@ -105,27 +121,6 @@ class MovieShowPage extends Component {
 			movieBackdropAlt = this.state.movie.title + ' backdrop';
 		}
 
-		const foundFavorite = this.props.userFavorites.find(favorite => favorite == this.props.movieID)
-	  let isAFavorite = false
-		console.log(foundFavorite)
-	  if(foundFavorite) {
-	    isAFavorite = true
-	  }
-
-		const renderFavoriteButton = (id) => {
-	    if(id) {
-				console.log(isAFavorite + 'Is a favorite in render button')
-	      return (<FavoriteButton
-	        userID={this.props.userID}
-	        movieID={this.props.movieID}
-	        isAFavorite={isAFavorite}
-	        populateUserFeedback={this.props.populateUserFeedback}
-	      />)
-	    } else {
-	      return
-	    }
-	  }
-
 		return (
 			<section className='movie-show-page'>
 				<img
@@ -139,7 +134,7 @@ class MovieShowPage extends Component {
 						src={this.state.movie.poster_path}
 						alt={this.state.movie.title + 'poster'}
 					/>
-					{renderFavoriteButton(this.props.userID)}
+					{this.renderFavoriteButton(this.props.userID)}
 					<div className='movie-info'>
 						<h1>{this.state.movie.title}</h1>
 						<h2>Release Date: {this.state.movie.release_date} </h2>
@@ -148,9 +143,7 @@ class MovieShowPage extends Component {
 						</h3>
 						{this.state.wrongInput || this.state.error ? (
 							<h3>{this.state.wrongInput || this.state.error}</h3>
-						) : (
-							''
-						)}
+						) : ('')}
 						{this.props.userID ? (
 							userRatingSection
 						) : (
@@ -169,8 +162,8 @@ export default MovieShowPage;
 
 MovieShowPage.propTypes = {
 	userFavorites: PropTypes.array,
-  movieID: PropTypes.string.isRequired,
+  movieID: PropTypes.number.isRequired,
   userMovieRatings: PropTypes.array,
   userID: PropTypes.number,
-  populateUserRatings: PropTypes.func.isRequired
+  populateUserFeedback: PropTypes.func.isRequired
 }
