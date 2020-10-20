@@ -44,7 +44,7 @@ class MovieMain extends Component {
             movie={movie}
             userMovieRatings={this.props.currentUser.ratings}
             userFavorites={this.props.currentUser.favorites}
-            toggleFavorite={this.toggleFavorite}
+            populateUserFeedback={this.props.populateUserFeedback}
             userID={this.props.currentUser.id}
           />
         )
@@ -55,11 +55,12 @@ class MovieMain extends Component {
           favorites.push(
             <MovieTile
               key={movie.id}
+              userID={this.props.currentUser.id}
               movie={movie}
               userMovieRatings={this.props.currentUser.ratings}
               userFavorites={this.props.currentUser.favorites}
-              toggleFavorite={this.toggleFavorite}
               userID={this.props.currentUser.id}
+              populateUserFeedback={this.props.populateUserFeedback}
             />
           )
         }

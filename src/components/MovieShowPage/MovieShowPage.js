@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Comments from '../Comments/Comments';
+import FavoriteButton from '../FavoriteButton/FavoriteButton'
 import PropTypes from 'prop-types';
 
 import { getOneMovie, rateMovie, deleteMovieRating } from '../../apiCalls.js';
