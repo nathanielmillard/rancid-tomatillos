@@ -159,7 +159,7 @@ export const postMovieComment = (movieID, comment) => {
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify(comment),    
+		body: JSON.stringify(comment),
   })
   .then(response => {
     if (response.ok) {
@@ -177,7 +177,7 @@ export const postMovieComment = (movieID, comment) => {
   });
 }
 
-export const toggleFavoriteMovie = (movie) => {
+export const toggleFavoriteMovie = (movieID) => {
   return fetch('http://localhost:3001/api/v1/favorites', {
     method: 'POST',
     headers: {
@@ -185,7 +185,7 @@ export const toggleFavoriteMovie = (movie) => {
     },
     body: JSON.stringify(
       {
-        id: movie.id
+        id: movieID
       }
     )
   })
