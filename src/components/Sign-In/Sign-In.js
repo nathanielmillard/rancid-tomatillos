@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-
+import {Link} from 'react-router-dom'
 import {logInUser} from '../../apiCalls.js'
 import PropTypes from 'prop-types';
 
@@ -42,6 +42,8 @@ class SignIn extends Component {
         <input name='password' type='password' placeholder='password' onChange={this.updateState}/>
         <button onClick={this.evaluateUser}>Submit</button>
         { (this.state.wrongInput || this.state.error) ? <h3>{this.state.wrongInput || this.state.error }</h3> : ''}
+
+        <Link to='/'>Home</Link>
       </form>
     )
 }
