@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import './FavoriteButton.scss'
+
 import favoriteButton from '../../images/favorite-button.svg'
 import unfavoriteButton from '../../images/unfavorite-button.svg'
 import { toggleFavoriteMovie } from '../../apiCalls.js'
+
 
 const FavoriteButton = (props) => {
   let imagesource, altCaption
