@@ -1,9 +1,9 @@
 # Rancid Tomatillos
 
 ## Abstract
-Rancid Tomatillos is a React App where a user can view movie ratings, view movie descriptions and comments other users left on a movie. A user is able to log in to expand their capabilites to favoriting movies, leaving comments on movies and rate the movies. A user is able to delete their rating and add a new rating for movies that they have already commented on, allowing for one rating per user per movie.
+Rancid Tomatillos is a React App where a user can view movie ratings, view movie descriptions and comments other users left on a movie. A user is able to log in to expand their capabilites further to favoriting movies, leaving comments on movies and rating the movies. A user is able to delete their rating and add a new rating for movies that they have already rated on, allowing for one rating per user per movie.
 
-In this project, we started fresh with `create-react-app` and developed the entire application from scratch. Includes a robust testing suite with Jest, fetching and posting to multiple API's, SCSS, custom error handling understandable for a user, an express JS server for comments/favoriting and other technologies that will be listed inside the tech stack.
+In this project, we started fresh with `create-react-app` and developed the entire application from scratch. Includes a testing suite with Jest, fetching and posting to multiple API's, SCSS, custom error handling understandable for a user, an express JS server for comments/favoriting and other technologies that will be listed inside the tech stack.
 
 ### App in Action
 ![Rancid Tomatillos No User](./src/images/Rancid-tomatillos-no-user.gif)
