@@ -38,11 +38,11 @@ export default class Comments extends Component {
 		const commentData = {
 			id: Date.now(),
 			movieId: +this.props.movieID,
-			author: this.props.userID,
+			author: this.props.userName,
 			comment: this.state.comment,
 			created_at: Date.now(),
 		};
-		postMovieComment(commentData.movieId, commentData).then(response => 
+		postMovieComment(commentData.movieId, commentData).then(response =>
 			this.setState({ comments: [...this.state.comments, response.newComment ],  loading: '', error: ''}));
 		this.resetInputs();
 	};
@@ -59,7 +59,7 @@ export default class Comments extends Component {
 	render() {
 		return (
 			<section className='comments-container'>
-				{this.props.userID ? (
+				{this.props.userName ? (
 					<form className='comment-form'>
 						<label htmlFor='comment'>Submit A New Comment</label>
 						<textarea
@@ -96,6 +96,6 @@ export default class Comments extends Component {
 }
 
 Comments.propTypes = {
-	movieID: propTypes.string.isRequired,
-	userID: propTypes.string,
+	movieID: propTypes.number.isRequired,
+	userName: propTypes.string,
 };

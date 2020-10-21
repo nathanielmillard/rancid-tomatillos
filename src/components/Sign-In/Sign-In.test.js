@@ -18,21 +18,6 @@ describe('Sign-In', () => {
     expect(screen.getByText('Submit')).toBeInTheDocument();
   });
 
-  it("Should log in a user on submit button click with correct credientals", async () => {
-    const userData = {
-      email: 'lucy@turing.io',
-      password: 'passwor1'
-    }
-    logInUser.mockResolvedValue(userData)
-    const mockSignIn = jest.fn();
-    render(<SignIn logIn={mockSignIn} />)
-    userEvent.type(screen.getByPlaceholderText('email'), userData.email);
-    userEvent.type(screen.getByPlaceholderText('password'), userData.password);
-    userEvent.click(screen.getByText('Submit'));
-    screen.debug();
-    // expect(mockSignIn).toHaveBeenCalled();
-  });
-
   it("Should handle wrong username and password errors", () => {
     const mockSignIn = jest.fn();
     render(<SignIn logIn={mockSignIn} />);

@@ -21,7 +21,7 @@ class MovieMain extends Component {
 
   componentDidMount = () => {
     this.getAllMovieData();
-    this.props.populateUserFeedback(this.props.currentUser.id)
+    this.props.populateUserFeedback(this.props.currentUserInfo.currentUser.id)
   }
 
   getAllMovieData = () => {
@@ -32,7 +32,7 @@ class MovieMain extends Component {
 
   toggleFavorite = (specificMovie, target) => {
     toggleFavoriteMovie(specificMovie)
-    this.props.populateUserFeedback(this.props.currentUser.id);
+    this.props.populateUserFeedback(this.props.currentUserInfo.currentUser.id);
   }
 
   filterDisplay = () => {
@@ -41,26 +41,24 @@ class MovieMain extends Component {
         return (
           <MovieTile
           key={movie.id}
-          userID={this.props.currentUser.id}
           movie={movie}
-          userMovieRatings={this.props.currentUser.ratings}
-          userFavorites={this.props.currentUser.favorites}
-          userID={this.props.currentUser.id}
+          userMovieRatings={this.props.currentUserInfo.ratings}
+          userFavorites={this.props.currentUserInfo.favorites}
+          userID={this.props.currentUserInfo.currentUser.id}
           populateUserFeedback={this.props.populateUserFeedback}
           />
         )
       })
-    } else if (this.props.view === 'favorites' && this.props.currentUser.id) {
+    } else if (this.props.view === 'favorites' && this.props.currentUserInfo.currentUser.id) {
       let favoriteList = this.state.movies.reduce((favorites, movie) => {
-        if (this.props.currentUser.favorites.includes(movie.id)){
+        if (this.props.currentUserInfo.favorites.includes(movie.id)){
           favorites.push(
             <MovieTile
               key={movie.id}
-              userID={this.props.currentUser.id}
+              userID={this.props.currentUserInfo.currentUser.id}
               movie={movie}
-              userMovieRatings={this.props.currentUser.ratings}
-              userFavorites={this.props.currentUser.favorites}
-              userID={this.props.currentUser.id}
+              userMovieRatings={this.props.currentUserInfo.ratings}
+              userFavorites={this.props.currentUserInfo.favorites}
               populateUserFeedback={this.props.populateUserFeedback}
             />
           )
@@ -72,7 +70,7 @@ class MovieMain extends Component {
       } else {
         return <h2>You have no favorites</h2>
       }
-    } else if (this.props.view === 'favorites' && !this.props.currentUser.id) {
+    } else if (this.props.view === 'favorites' && !this.props.currentUserInfo.currentUser.id) {
       return <h2>Sign in to save favorites!</h2>
     }
   }
@@ -95,6 +93,7 @@ class MovieMain extends Component {
 export default MovieMain;
 
 MovieMain.propTypes = {
-  currentUser: PropTypes.object,
-  populateUserFeedback: PropTypes.func
+  view: PropTypes.string,
+  currentUserInfo: PropTypes.object.isRequired,
+  populateUserFeedback: PropTypes.func.isRequired
 }
