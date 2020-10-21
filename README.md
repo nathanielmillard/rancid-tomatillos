@@ -68,7 +68,7 @@ Inside of the Rancid Tomatillos directory--> npm test
 - Tackling complicated logic involving a brand new tech stack and setting up new technologies on our own.
 - Having a full set of tests through TDD that tests for unit component testing, integration between multiple component testing and interactive testing to simulate user actions and feedback.
 - Having our state live in as few places as possible, while still having all of the data and UI update in real time with every user action.
-- Completing all 7 iterations and an extension to deploy on Heroku.
+- Completing all 7 iterations.
 
 ## Contributors
 - [Nathan Darrington](https://github.com/npdarrington)
