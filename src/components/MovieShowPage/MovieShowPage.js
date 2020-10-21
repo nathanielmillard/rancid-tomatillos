@@ -19,7 +19,9 @@ class MovieShowPage extends Component {
 	}
 
 	componentDidMount = () => {
-		getOneMovie(this.props.movieID).then(response => this.setState(response));
+		getOneMovie(this.props.movieID).then(response => {
+			this.setState(response)
+		});
 	};
 
 	submitRating = () => {
@@ -106,7 +108,7 @@ class MovieShowPage extends Component {
 						max='10'
 						onChange={this.updateRatingInput}
 					/>
-					<button onClick={this.submitRating}>Submit</button>
+					<button onClick={this.submitRating}>Submit Rating</button>
 				</label>
 			);
 		}
@@ -136,7 +138,7 @@ class MovieShowPage extends Component {
 					<img
 						className='main-poster'
 						src={this.state.movie.poster_path}
-						alt={this.state.movie.title + 'poster'}
+						alt={this.state.movie.title + ' poster'}
 					/>
 					{this.renderFavoriteButton(this.props.userID)}
 					<div className='movie-info'>
