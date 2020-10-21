@@ -1,68 +1,79 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Rancid Tomatillos
 
-## Available Scripts
+## Abstract
+Rancid Tomatillos is a React App where a user can view movie ratings, view movie descriptions and comments other users left on a movie. A user is able to log in to expand their capabilites to favoriting movies, leaving comments on movies and rate the movies. A user is able to delete their rating and add a new rating for movies that they have already commented on, allowing for one rating per user per movie.
 
-In the project directory, you can run:
+In this project, we started fresh with `create-react-app` and developed the entire application from scratch. Includes a robust testing suite with Jest, fetching and posting to multiple API's, SCSS, custom error handling understandable for a user, an express JS server for comments/favoriting and other technologies that will be listed inside the tech stack.
 
-### `npm start`
+### App in Action
+![Rancid Tomatillos No User](./src/images/Rancid-tomatillos-no-user.gif)
+![Rancid Tomatillos User Leaving Comment](./src/images/Rancid-tomatillos-user-rating.gif)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Setup & Installation
+To view and use the application, clone down [this repository](https://github.com/nathanielmillard/rancid-tomatillos) and install with npm.
+```
+git@github.com:nathanielmillard/rancid-tomatillos.git
+npm install
+npm start --> localhost:3000 by default
+```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+In order for comments and favoriting functionality to work, you will also have to clone and install the rancid-tomatillos-microserver [at this repository](https://github.com/nathanielmillard/rancid-tomatillos-microserver).
 
-### `npm test`
+**The microserver must be in a directory outside of the Rancid Tomatillos directory**
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+git@github.com:nathanielmillard/rancid-tomatillos-microserver.git
+npm install
+npm start --> localhost:3001 by default
+```
+To view the test suite for Rancid Tomatillos:
+```
+Inside of the Rancid Tomatillos directory--> npm test
+```
 
-### `npm run build`
+## Skills
+- Stateful and Pure components
+- React Router DOM
+- Test Driven Development - Jest, React Router Library, User Event
+- Accessibility - A color scheme that accommodates for colorblindness and accessibility score 90+
+- Working with a partner to develop the app side by side with meeting collaborations, as well as driving assigned functionality individually.
+- Code base efficiency by following SRP and DRY principles and using newer technologies.
+- Conditionally rendering and artfully displaying specific feedback messages for user for a smooth UI/UX experience.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Technologies Used
+- Create React App
+- React Router
+- JSX
+- HTML
+- CSS/SASS
+- Jest
+- NPM
+- GitHub/Git
+- Eslint
+- React Testing Library
+- Express JS
+- Restful API
+- User-Event
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Wins & Challenges
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Challenges
+- Deciding how to structure the UI to let the user have a fun, intuitive and easy to use experience without a lot of bloat while waiting for API fetch calls.
+- Information feedback for the user that allows them to see exactly what is happening with every action they perform.
+- Using Express JS to set up our own servers to handle commenting and favoriting functionality.
+- Deciding the most efficient classes for state to live. Learning when data is being passed down too far through prop drilling.
+- A large learning curve with React Testing Library as well as unit, integration and interactive testing.
 
-### `npm run eject`
+### Wins
+- Tackling complicated logic involving a brand new tech stack and setting up new technologies on our own.
+- Having a full set of tests through TDD that tests for unit component testing, integration between multiple component testing and interactive testing to simulate user actions and feedback.
+- Having our state live in as few places as possible, while still having all of the data and UI update in real time with every user action.
+- Completing all 7 iterations and an extension to deploy on Heroku.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Contributors
+- [Nathan Darrington](https://github.com/npdarrington)
+- [Nathaniel Millard](https://github.com/nathanielmillard)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Additional Links
+- [Project Board](https://github.com/nathanielmillard/rancid-tomatillos/projects/1)
+- [Original Project Specs](https://frontend.turing.io/projects/module-3/rancid-tomatillos-v2.html)
