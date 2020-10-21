@@ -158,7 +158,7 @@ class MovieShowPage extends Component {
 						<p>{this.state.movie.overview}</p>
 					</div>
 				</div>
-				<Comments movieID={this.props.movieID} userID={this.props.userID} />
+				<Comments movieID={this.props.movieID} userName={this.props.userName} />
 			</section>
 		);
 	}
@@ -171,5 +171,6 @@ MovieShowPage.propTypes = {
   movieID: PropTypes.number.isRequired,
   userMovieRatings: PropTypes.array,
   userID: PropTypes.number,
+	userName: PropTypes.string,
   populateUserFeedback: PropTypes.func.isRequired
 }

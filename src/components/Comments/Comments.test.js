@@ -45,7 +45,7 @@ describe('Comments', () => {
 		getAllMovieComments.mockResolvedValueOnce(mockNoComments);
 		const { getByText } = render(
 			<MemoryRouter>
-				<Comments movieID={446893} userID={''} />
+				<Comments movieID={446893} userName={''} />
 			</MemoryRouter>
 		);
 		const message = await waitFor(() =>
@@ -58,7 +58,7 @@ describe('Comments', () => {
 		getAllMovieComments.mockResolvedValueOnce(mockNoComments);
 		const { getByText } = render(
 			<MemoryRouter>
-				<Comments movieID={446893} userID={''} />
+				<Comments movieID={446893} userName={''} />
 			</MemoryRouter>
 		);
 		const message = await waitFor(() =>
@@ -71,7 +71,7 @@ describe('Comments', () => {
 		getAllMovieComments.mockResolvedValueOnce(mockMovieComments);
 		const { getByText } = render(
 			<MemoryRouter>
-				<Comments movieID={446893} userID={''} />
+				<Comments movieID={446893} userName={''} />
 			</MemoryRouter>
 		);
 		const message = await waitFor(() => getByText('This movie is magical!'));
@@ -84,7 +84,7 @@ describe('Comments', () => {
 		getAllMovieComments.mockResolvedValueOnce(mockMovieComments);
 		const { getByPlaceholderText, getByRole } = render(
 			<MemoryRouter>
-				<Comments movieID={446893} userID={'78'} />
+				<Comments movieID={446893} userName={'Lucy'} />
 			</MemoryRouter>
 		);
 		const message = await waitFor(() =>
@@ -99,7 +99,7 @@ describe('Comments', () => {
 		getAllMovieComments.mockResolvedValueOnce(mockMovieComments);
 		const { getByText, getByRole } = render(
 			<MemoryRouter>
-				<Comments movieID={446893} userID={'78'} />
+				<Comments movieID={446893} userName={'Lucy'} />
 			</MemoryRouter>
 		);
 		userEvent.click(getByRole('button', { name: 'Submit' }));
@@ -114,7 +114,7 @@ describe('Comments', () => {
 		postMovieComment.mockResolvedValueOnce(submitMovieComment);
 		const { getByText, getByPlaceholderText, getByRole } = render(
 			<MemoryRouter>
-				<Comments movieID={446893} userID={'78'} />
+				<Comments movieID={446893} userName={'Lucy'} />
 			</MemoryRouter>
 		);
 		const textArea = await waitFor(() =>
@@ -130,7 +130,7 @@ describe('Comments', () => {
     getAllMovieComments.mockResolvedValueOnce(mockRejectedFetch);
 		const { getByText } = render(
 			<MemoryRouter>
-				<Comments movieID={446893} userID={'78'} />
+				<Comments movieID={446893} userName={'Lucy'} />
 			</MemoryRouter>
 		);
 		const message = await waitFor(() =>

@@ -100,6 +100,7 @@ class App extends Component {
 									movieID={movieID}
 									userMovieRatings={this.state.ratings}
 									userID={this.state.currentUser.id}
+									userName={this.state.currentUser.name}
 									populateUserFeedback={this.populateUserFeedback}
 								/>
 							</main>
